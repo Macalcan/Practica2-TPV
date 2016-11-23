@@ -83,13 +83,7 @@ bool juegoPG::initGlobos() {
 		explotados[i] = false; //aun no ha sido explotado
 	}
 	
-	x = ancho / 2 - 30;
-	y = alto / 2 - 30;
-	globos[0] = new GlobosPG(ptexture[0], x, y);
 	
-	x = ancho / 2 - 5;
-	y = alto / 2 - 5;
-	globos[1] = new GlobosPG(ptexture[0], x, y);
 	
 	numG = dim; //numero total de globos al principio del juego
 	return (ptexture[0] != nullptr && ptexture[1] != nullptr);
@@ -139,7 +133,7 @@ void juegoPG::render()const {
 void juegoPG::onClick(int &pmx, int &pmy){
 	bool click = false;
 	for (int i = dim; i >= 0 && (!click); i--){
-		if (globos[i]->onClick(pmx, pmy) && !explotados[i]){
+		if (globos[i]->onClick(pmx, pmy)){
 			puntos += globos[i]->getPuntos();
 			click = true;
 		}
@@ -149,9 +143,8 @@ void juegoPG::onClick(int &pmx, int &pmy){
 //recorre todos los globos actualizandolos y comprobando si se han desinflado o explotado, y por lo tanto no son visibles
 void juegoPG::update() {
 	for (int i = 0; i < dim; i++) {
-		if (globos[i]->update() && !explotados[i]) { //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
+		if (globos[i]->update()){ //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
 			numG--;
-			explotados[i] = true;
 		}
 	}
 }
@@ -220,7 +213,7 @@ juegoPG::~juegoPG()
 {
 	closeSDL();
 	freeGlobos();
-	ptexture[2] = nullptr;
+	delete(ptexture[2]);
 	pWindow = nullptr;
 	pRenderer = nullptr;
 }

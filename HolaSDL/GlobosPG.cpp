@@ -29,7 +29,7 @@ void GlobosPG::draw(SDL_Renderer* pRenderer)const{
 //--------------------------------------------------------------------------------//
 bool GlobosPG::onClick(int &pmx, int &pmy){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
-	if (!invisible && pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)){
+	if (!explotado && !invisible && pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)){
 		invisible = true;
 		return explotado = true;
 	}
