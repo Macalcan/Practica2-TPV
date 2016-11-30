@@ -22,6 +22,10 @@ public:
 private:
 	enum Texturas_t { TFondo, TGloboN, TGloboM, Tmariposa, Tpremio };
 	string rutasText [5];
+	//TexturasSDL* getTextura(Texturas et)const { return texturas[et] };
+	SDL_Renderer* getRender () const;
+	void getMousePos(int & mpx, int & mpy) const;
+	// los new van a necesitar hacer casting de clase dynamic_cast
 	void newBaja(ObjetoJuego* po);
 	void newPuntos(ObjetoJuego* po);
 	void newPremio(ObjetoJuego* po);

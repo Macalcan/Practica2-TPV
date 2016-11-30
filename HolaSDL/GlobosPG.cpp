@@ -3,12 +3,12 @@
 using namespace std;
 
 
-GlobosPG::GlobosPG(TexturasSDL* img, int &px, int &py)
+GlobosPG::GlobosPG(ObjetoJuego* juego, TexturasSDL* img, int &px, int &py)
 {
 	x = px; //posicion en el eje x e y del globo
 	y = py;
 	imagen = img; //apuntara a la textura del globo ademas de hacer que se dibuje
-
+	game = juego;
 	alto = ancho = 100; //tamaño del globo
 	explotado = false; 
 	invisible = false;
@@ -19,28 +19,39 @@ GlobosPG::GlobosPG(TexturasSDL* img, int &px, int &py)
 
 
 //--------------------------------------------------------------------------------//
-void GlobosPG::draw(SDL_Renderer* pRenderer)const{
-	if (!invisible){ //en caso de estar visible se dibuja
+void GlobosPG::draw()const{
+	if (!invisible){
+		SDL_Rect datBalloon;
+		datBalloon = { x, y, ancho, alto };
+		game->draw();
+	}
+	/*if (!invisible){ //en caso de estar visible se dibuja
 		SDL_Rect datBalloon;
 		datBalloon = { x, y, ancho, alto };
 		imagen->draw(pRenderer, datBalloon);
-	}
+	}*/
 }
 //--------------------------------------------------------------------------------//
-bool GlobosPG::onClick(int &pmx, int &pmy){
+bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
-	if (!explotado && !invisible && pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)){
+	
+	if (dentro(x, y)){
 		invisible = true;
 		return explotado = true;
 	}
 	else return false;
+	/*if (!explotado && !invisible && pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)){
+		invisible = true;
+		return explotado = true;
+	}
+	else return false;*/
 }
 //--------------------------------------------------------------------------------//
 //actualiza el globo
-bool GlobosPG::update(){
+void GlobosPG::update(){
 	//si se ha deshinchado o se ha explotado el globo ya no sera visible 
 	if (inflado == 0 || explotado)
-		return invisible = true;
+		/*return*/ invisible = true;
 	else{
 		if (rand() % 100 < PVIS) //probabilidad de que sea visible o no
 			invisible = false;
@@ -53,7 +64,7 @@ bool GlobosPG::update(){
 			ancho -= 10;
 			puntos += 2;//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
 		}
-		return false;
+		//return false;
 	}
 }
 //getter de puntos del globo

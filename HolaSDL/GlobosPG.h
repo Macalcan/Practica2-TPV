@@ -2,18 +2,20 @@
 #pragma once
 #include "SDL.h"
 #include "TexturasSDL.h"
-
-class GlobosPG
+#include "ObjetoPG.h"
+class GlobosPG: public ObjetoPG
 {
 public:
-	GlobosPG(TexturasSDL* img, int &px, int &py);
-	bool onClick(int &pmx, int &pmy);
-	void draw(SDL_Renderer* pRenderer) const;
+	GlobosPG(ObjetoJuego* juego, TexturasSDL* img, int &px, int &py);
+	bool onClick();
+	void draw() const;
 	int getPuntos();
-	bool update();
-	
+	void update();
+	int getAlto();
+	int getAncho();
 	~GlobosPG();
 private:
+	ObjetoJuego* game;
 	static const int PVIS = 70; 
 	static const int PDES = 30;
 	TexturasSDL* imagen;
