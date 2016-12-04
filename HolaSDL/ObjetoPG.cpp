@@ -3,10 +3,11 @@
 
 ObjetoPG::ObjetoPG()
 {
+	juegoPG* juego = nullptr;
 }
 
 bool ObjetoPG::dentro(int x, int y) const{
-	//(pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)
+	return (pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto))
 	
 }
 

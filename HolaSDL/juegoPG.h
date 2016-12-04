@@ -9,6 +9,7 @@ const int dim = 10; //10; //dimension del array de los globos
 
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
+const int numText = 3;
 class juegoPG
 {
 public:
@@ -20,10 +21,11 @@ public:
 	~juegoPG();
 
 private:
-	enum Texturas_t { TFondo, TGloboN, TGloboM, Tmariposa, Tpremio };
-	string rutasText [5];
-	//TexturasSDL* getTextura(Texturas et)const { return texturas[et] };
-	SDL_Renderer* getRender () const;
+	enum Texturas_t { TFondo, TGloboN, TGloboM }; //, Tmariposa, Tpremio
+//};
+	string rutasText [numText];
+	TexturasSDL* getTextura (Texturas_t et)const;
+	SDL_Renderer* getRender () const; // es el nuevo pRenderer
 	void getMousePos(int & mpx, int & mpy) const;
 	// los new van a necesitar hacer casting de clase dynamic_cast
 	void newBaja(ObjetoJuego* po);
@@ -46,8 +48,9 @@ private:
 	SDL_Window* pWindow;
 	SDL_Renderer* pRenderer;
 	bool pausa; //para pausar la actualizacion de los globos
-	ObjetoJuego* globos[dim]; //array de los globos
+	ObjetoJuego* objetos[dim]; //array de los objetos
 	TexturasSDL* ptexture [3]; //array de texturas usadas en el juego
 	int numG; //numero de globos
+	
 };
 

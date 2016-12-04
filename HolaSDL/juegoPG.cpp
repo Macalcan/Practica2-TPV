@@ -2,7 +2,8 @@
 #include "juegoPG.h"
 #include "TexturasSDL.h"
 #include <iostream>
-#include "GlobosPG.h"
+#include <string>
+#include "ObjetoPG.h"
 using namespace std;
 
 juegoPG::juegoPG()
@@ -23,6 +24,7 @@ juegoPG::juegoPG()
 	initSDL();
 	initGlobos();
 	initFondo();
+	Texturas_t et;
 	
 }
 //--------------------------------------------------------------------------------//
@@ -79,7 +81,7 @@ bool juegoPG::initGlobos() {
 	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		globos[i] = new GlobosPG(ptexture[i%2], x, y); //cada globo tendrá la textura 0 o la textura 1
+		objetos[i] = new ObjetoJuego(ptexture[i%2], x, y); //cada globo tendrá la textura 0 o la textura 1
 		explotados[i] = false; //aun no ha sido explotado
 	}
 	
@@ -121,7 +123,7 @@ void juegoPG::render()const {
 	ptexture[2]->draw(pRenderer, rect); //dibuja el fondo
 
 	for (int i = 0; i < dim; i++){ //dibuja los globos
-		globos[i]->draw(pRenderer);
+		objetos[i]->draw();
 	}
 
 	//Show the window
@@ -133,8 +135,8 @@ void juegoPG::render()const {
 void juegoPG::onClick(int &pmx, int &pmy){
 	bool click = false;
 	for (int i = dim; i >= 0 && (!click); i--){
-		if (globos[i]->onClick(pmx, pmy)){
-			puntos += globos[i]->getPuntos();
+		if (objetos[i]->onClick()){
+			puntos += objetos[i]->getPuntos();
 			click = true;
 		}
 	}
@@ -143,7 +145,7 @@ void juegoPG::onClick(int &pmx, int &pmy){
 //recorre todos los globos actualizandolos y comprobando si se han desinflado o explotado, y por lo tanto no son visibles
 void juegoPG::update() {
 	for (int i = 0; i < dim; i++) {
-		if (globos[i]->update()){ //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
+		if (objetos[i]->update()){ //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
 			numG--;
 		}
 	}
@@ -156,7 +158,7 @@ void juegoPG::handle_event() {
 		else if (e.type == SDL_MOUSEBUTTONUP) {
 			if (e.button.button == SDL_BUTTON_LEFT) {
 				cout << "CLICK";
-				onClick(e.button.x, e.button.y);
+				getMousePos(e.button.x, e.button.y);
 			}
 		}
 		else if (e.type == SDL_KEYUP){ //si se pulsa una tecla comprueba que es p
@@ -207,7 +209,94 @@ void juegoPG::run()
 
 
 }
+//--------------------------------------------------------------------------------//
+void juegoPG::getMousePos(int &mpx, int &mpy) const {
+	//hay que añadir atributos para la posicion del raton (debe actualizarse en onClick)
+	int x = mpx;
+	int y = mpy;
+	
 
+}
+//--------------------------------------------------------------------------------//
+void juegoPG::newBaja(ObjetoJuego* po) {
+
+
+}
+//--------------------------------------------------------------------------------//
+void juegoPG::newPuntos(ObjetoJuego* po) {
+	if (po->onClick()) {}
+		// llamamos a getPuntos
+}
+//--------------------------------------------------------------------------------//
+void juegoPG::newPremio(ObjetoJuego* po) {
+	po->update();
+}
+//--------------------------------------------------------------------------------//
+TexturasSDL* juegoPG::getTextura(Texturas_t et)const {
+	TexturasSDL* texturas[numText];
+	string file = "";
+
+	for (int i = 0; i < numText; i++) {
+		switch (i) {
+		case TFondo:
+			file = { "..\\bmps\\sky.jpg" };
+			rutasText[TFondo] = file;
+			break;
+		case TGloboN:
+			file = { "..\\bmps\\globoN.png" };
+			rutasText[TGloboN] = file;
+			break;
+		case TGloboM:
+			file = { "..\\bmps\\globoM.png" };
+			rutasText[TGloboM] = file;
+			break;
+		}
+		texturas[i]->load(pRenderer, rutasText[i]);
+	}
+
+	/*rutasText[0] = file;
+	texturas[0]->load(pRenderer, rutasText [0]);
+	file = { "..\\bmps\\globoN.png" };
+	rutasText[1] = file;
+	texturas[1]->load(pRenderer, rutasText[1]);
+	file = { "..\\bmps\\globoM.png" };
+	rutasText[2] = file;
+	texturas[2]->load(pRenderer, rutasText[2]);*/
+
+	return texturas[et];
+}
+//--------------------------------------------------------------------------------//
+void juegoPG::initMedia() {
+
+	//declaras variables aleatorias x e y que indican la posicion de cada globo
+	int x;
+	int y;
+
+	for (int i = 0; i < numText; i++) {
+		switch (i) {
+			case TFondo:
+				getTextura(TFondo);
+				break;
+			case TGloboN:
+				getTextura(TGloboN);
+				break;
+			case TGloboM:
+				getTextura(TGloboM);
+				break;
+		}
+	}
+
+	for (int i = 0; i < dim; i++) {//creamos un objeto en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
+		x = rand() % 450;
+		y = rand() % 450;
+		objetos[i] = new ObjetoJuego(ptexture[i % 2], x, y); //cada globo tendrá la textura 0 o la textura 1
+	}
+
+	numG = dim; //numero total de globos al principio del juego
+}
+//--------------------------------------------------------------------------------//
+void juegoPG::freeMedia() {
+}
 //--------------------------------------------------------------------------------//
 juegoPG::~juegoPG()
 {
