@@ -56,6 +56,10 @@ bool juegoPG::initSDL() {
 	return carga;
 }
 //--------------------------------------------------------------------------------//
+
+SDL_Renderer* juegoPG::getRender() const {
+	return pRenderer;
+}
 //crea el fondo
 bool juegoPG::initFondo(){
 	ptexture[2] = new TexturasSDL;
@@ -73,15 +77,12 @@ bool juegoPG::initGlobos() {
 	}
 	
 	//carga las texturas de los globos
-	string nombre = { "..\\bmps\\globoN.png" };
-	ptexture[0]->load(pRenderer, nombre);
-	nombre = {"..\\bmps\\globoM.png"};
-	ptexture[1]->load(pRenderer, nombre);
-
+	//TGloboN = getTextura(TGloboN);
+	
 	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos[i] = new ObjetoJuego(ptexture[i%2], x, y); //cada globo tendrá la textura 0 o la textura 1
+		objetos[i] = new ObjetoJuego(t[i%2], x, y); //cada globo tendrá la textura 0 o la textura 1
 		explotados[i] = false; //aun no ha sido explotado
 	}
 	
@@ -132,7 +133,7 @@ void juegoPG::render()const {
 //--------------------------------------------------------------------------------//
 //comprueba si al hacer click ha explotado el globo a traves del metodo onClick de GlobosPG y si lo ha explotado saca los puntos del globo y los suma
 //a los puntos conseguidos en total
-void juegoPG::onClick(int &pmx, int &pmy){
+void juegoPG::onClick(){
 	bool click = false;
 	for (int i = dim; i >= 0 && (!click); i--){
 		if (objetos[i]->onClick()){
@@ -158,7 +159,9 @@ void juegoPG::handle_event() {
 		else if (e.type == SDL_MOUSEBUTTONUP) {
 			if (e.button.button == SDL_BUTTON_LEFT) {
 				cout << "CLICK";
-				getMousePos(e.button.x, e.button.y);
+				x = e.button.x;
+				y = e.button.y;
+				onClick();
 			}
 		}
 		else if (e.type == SDL_KEYUP){ //si se pulsa una tecla comprueba que es p
@@ -212,8 +215,8 @@ void juegoPG::run()
 //--------------------------------------------------------------------------------//
 void juegoPG::getMousePos(int &mpx, int &mpy) const {
 	//hay que añadir atributos para la posicion del raton (debe actualizarse en onClick)
-	int x = mpx;
-	int y = mpy;
+	mpx = x;
+	mpy = y;
 	
 
 }
@@ -232,72 +235,7 @@ void juegoPG::newPremio(ObjetoJuego* po) {
 	po->update();
 }
 //--------------------------------------------------------------------------------//
-TexturasSDL* juegoPG::getTextura(Texturas_t et)const {
-	TexturasSDL* texturas[numText];
-	string file = "";
 
-	for (int i = 0; i < numText; i++) {
-		switch (i) {
-		case TFondo:
-			file = { "..\\bmps\\sky.jpg" };
-			rutasText[TFondo] = file;
-			break;
-		case TGloboN:
-			file = { "..\\bmps\\globoN.png" };
-			rutasText[TGloboN] = file;
-			break;
-		case TGloboM:
-			file = { "..\\bmps\\globoM.png" };
-			rutasText[TGloboM] = file;
-			break;
-		}
-		texturas[i]->load(pRenderer, rutasText[i]);
-	}
-
-	/*rutasText[0] = file;
-	texturas[0]->load(pRenderer, rutasText [0]);
-	file = { "..\\bmps\\globoN.png" };
-	rutasText[1] = file;
-	texturas[1]->load(pRenderer, rutasText[1]);
-	file = { "..\\bmps\\globoM.png" };
-	rutasText[2] = file;
-	texturas[2]->load(pRenderer, rutasText[2]);*/
-
-	return texturas[et];
-}
-//--------------------------------------------------------------------------------//
-void juegoPG::initMedia() {
-
-	//declaras variables aleatorias x e y que indican la posicion de cada globo
-	int x;
-	int y;
-
-	for (int i = 0; i < numText; i++) {
-		switch (i) {
-			case TFondo:
-				getTextura(TFondo);
-				break;
-			case TGloboN:
-				getTextura(TGloboN);
-				break;
-			case TGloboM:
-				getTextura(TGloboM);
-				break;
-		}
-	}
-
-	for (int i = 0; i < dim; i++) {//creamos un objeto en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
-		x = rand() % 450;
-		y = rand() % 450;
-		objetos[i] = new ObjetoJuego(ptexture[i % 2], x, y); //cada globo tendrá la textura 0 o la textura 1
-	}
-
-	numG = dim; //numero total de globos al principio del juego
-}
-//--------------------------------------------------------------------------------//
-void juegoPG::freeMedia() {
-}
-//--------------------------------------------------------------------------------//
 juegoPG::~juegoPG()
 {
 	closeSDL();

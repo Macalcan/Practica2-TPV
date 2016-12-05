@@ -40,19 +40,14 @@ bool GlobosPG::onClick(){
 		return explotado = true;
 	}
 	else return false;
-	/*if (!explotado && !invisible && pmx >= x && pmx <= (x + ancho) && pmy >= y && pmy <= (y + alto)){
-		invisible = true;
-		return explotado = true;
-	}
-	else return false;*/
 }
 //--------------------------------------------------------------------------------//
 //actualiza el globo
 void GlobosPG::update(){
 	//si se ha deshinchado o se ha explotado el globo ya no sera visible 
 	if (inflado == 0 || explotado)
-		/*return*/ invisible = true;
-	else{
+		invisible = true;
+	else {
 		if (rand() % 100 < PVIS) //probabilidad de que sea visible o no
 			invisible = false;
 		else

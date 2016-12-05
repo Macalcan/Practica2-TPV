@@ -5,17 +5,26 @@
 class ObjetoPG : public ObjetoJuego
 {
 public:
-	ObjetoPG(juego->Texturas_t);
+
+	ObjetoPG();
 	virtual ~ObjetoPG();
 	bool dentro(int x, int y) const; //llamara a posMouse de juegoPG
-	int setAncho(int an) const;
-	int setAlto(int al) const;
+	
 private:
-	juegoPG* juego;
-	int alto;
-	int ancho;
+
 protected:
+	
+	void draw();
+	void update();
 	// sustituye al puntero a la textura y al renderizador de la clase Globo
 	juegoPG* juego;
+	SDL_Renderer* prender;
+
+	int x;
+	int y;
+	int alto;
+	int ancho;
+	SDL_Rect objeto;
+	Texturas_t texturas;
 };
 

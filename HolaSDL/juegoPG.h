@@ -10,22 +10,23 @@ const int dim = 10; //10; //dimension del array de los globos
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
 const int numText = 3;
+enum Texturas_t { TFondo, TGloboN, TGloboM }; //, Tmariposa, Tpremio
+
 class juegoPG
 {
 public:
 	juegoPG();
 	void run();
 	void getMousePos(int &mpx, int &mpy)const;
-	
 	SDL_Renderer* getRender()const;
+	TexturasSDL* getTextura(Texturas_t et) const { return texturas[et]; } //metodo inline
+	
 	~juegoPG();
 
 private:
-	enum Texturas_t { TFondo, TGloboN, TGloboM }; //, Tmariposa, Tpremio
+	
 //};
-	string rutasText [numText];
-	TexturasSDL* getTextura (Texturas_t et)const;
-	SDL_Renderer* getRender () const; // es el nuevo pRenderer
+	string rutasText [numText];	
 	void getMousePos(int & mpx, int & mpy) const;
 	// los new van a necesitar hacer casting de clase dynamic_cast
 	void newBaja(ObjetoJuego* po);
@@ -39,7 +40,7 @@ private:
 	bool initGlobos();
 	void freeGlobos();
 	void render()const;
-	void onClick(int &pmx, int &pmy);
+	void onClick();
 	void update();
 	void handle_event();
 	int puntos;
@@ -49,8 +50,10 @@ private:
 	SDL_Renderer* pRenderer;
 	bool pausa; //para pausar la actualizacion de los globos
 	ObjetoJuego* objetos[dim]; //array de los objetos
-	TexturasSDL* ptexture [3]; //array de texturas usadas en el juego
 	int numG; //numero de globos
+	TexturasSDL* texturas[numText];
+	int x; //para las posiciones del raton
+	int y; //para las posiciones del raton
 	
 };
 

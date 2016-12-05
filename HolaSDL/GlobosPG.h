@@ -21,12 +21,8 @@ private:
 	TexturasSDL* imagen;
 	int puntos; //puntos del globo
 	bool explotado; //booleana para saber si el globo ha sido explotado
-	int alto; //alto del globo
-	int ancho; //ancho del globo
-	int x; //posicion x del globo
-	int y; //posicion y del globo
 	int inflado; //cuenta el "aire" del globo
 	bool invisible; //booleana de si es visible el globo o no
-	SDL_Rect balloon; //rect del globo
+	
 };
 
