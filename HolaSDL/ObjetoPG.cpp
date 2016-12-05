@@ -4,7 +4,7 @@
 ObjetoPG::ObjetoPG()
 {	
 	juego = nullptr;
-	prender = juego->getRender();
+	
 }
 
 bool ObjetoPG::dentro(int x, int y) const{
@@ -16,13 +16,16 @@ bool ObjetoPG::dentro(int x, int y) const{
 }
 
 void ObjetoPG::draw(){
-	objeto = { x, y, ancho, alto };
+	rectObjeto = { x, y, ancho, alto };
+	//puntero de tipo juegoPG que apunta a TexturasSDL, de esta clase cogemos el draw y utilizamos renderer y rect
+	juego->getTextura(texturas)->draw(juego->getRender, rectObjeto);
 	
 }
 
 void ObjetoPG::update() {
 
 }
+
 
 ObjetoPG::~ObjetoPG()
 {

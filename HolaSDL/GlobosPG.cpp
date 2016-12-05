@@ -3,12 +3,12 @@
 using namespace std;
 
 
-GlobosPG::GlobosPG(ObjetoJuego* juego, TexturasSDL* img, int &px, int &py)
+GlobosPG::GlobosPG(juegoPG* juego, int &px, int &py)
 {
 	x = px; //posicion en el eje x e y del globo
 	y = py;
-	imagen = img; //apuntara a la textura del globo ademas de hacer que se dibuje
-	game = juego;
+	
+	game = juego; //puntero a la clase juegoPG
 	alto = ancho = 100; //tamaño del globo
 	explotado = false; 
 	invisible = false;
@@ -21,9 +21,7 @@ GlobosPG::GlobosPG(ObjetoJuego* juego, TexturasSDL* img, int &px, int &py)
 //--------------------------------------------------------------------------------//
 void GlobosPG::draw()const{
 	if (!invisible){
-		SDL_Rect datBalloon;
-		datBalloon = { x, y, ancho, alto };
-		game->draw();
+		ObjetoPG::draw();
 	}
 	/*if (!invisible){ //en caso de estar visible se dibuja
 		SDL_Rect datBalloon;

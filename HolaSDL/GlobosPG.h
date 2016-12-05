@@ -6,7 +6,7 @@
 class GlobosPG: public ObjetoPG
 {
 public:
-	GlobosPG(ObjetoJuego* juego, TexturasSDL* img, int &px, int &py);
+	GlobosPG(juegoPG* juego, int &px, int &py);
 	bool onClick();
 	void draw() const;
 	int getPuntos();
@@ -15,7 +15,7 @@ public:
 	int getAncho();
 	~GlobosPG();
 private:
-	ObjetoJuego* game;
+	juegoPG* game;
 	static const int PVIS = 70; 
 	static const int PDES = 30;
 	TexturasSDL* imagen;
