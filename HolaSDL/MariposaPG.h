@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "ObjetoPG.h"
 
-class MariposaPG
+class MariposaPG : public ObjetoPG
 {
 public:
 	MariposaPG(juegoPG* juego, int &px, int &py);
@@ -13,7 +13,9 @@ public:
 	~MariposaPG();
 
 private: 
+	int contClicks;
 	int x;
 	int y;
+	int frame;
 };
 

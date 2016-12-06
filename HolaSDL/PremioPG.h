@@ -3,7 +3,7 @@
 #include "SDL.h"
 #include "ObjetoPG.h"
 
-class PremioPG
+class PremioPG : public ObjetoPG
 {
 public:
 	PremioPG(juegoPG* juego, int &px, int &py);

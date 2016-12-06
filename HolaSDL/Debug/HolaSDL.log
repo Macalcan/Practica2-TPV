@@ -1,20 +1,85 @@
-﻿Build started 23/11/2016 18:24:13.
-     1>Project "C:\hlocal\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
+﻿Compilación iniciada a las 06/12/2016 17:00:43.
+     1>Proyecto "C:\Users\Blanca\Documents\Universidad\TPV\Practica 2\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ObjetoPG.cpp juegoPG.cpp mainP1.cpp
-         mainP1.cpp
-         juegoPG.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GlobosPG.cpp juegoPG.cpp mainP1.cpp MariposaPG.cpp ObjetoPG.cpp PremioPG.cpp TexturasSDL.cpp
+         TexturasSDL.cpp
+         PremioPG.cpp
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(8): error C2504: 'ObjetoPG' : clase base sin definir
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(10): error C2061: error de sintaxis : identificador 'juegoPG'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
          ObjetoPG.cpp
-         Generating Code...
-       Link:
-         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\Practica2-TPV\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\Practica2-TPV\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\Practica2-TPV\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\GlobosPG.obj
-         Debug\juegoPG.obj
-         Debug\mainP1.obj
-         Debug\ObjetoPG.obj
-         Debug\TexturasSDL.obj
-         HolaSDL.vcxproj -> C:\hlocal\Practica2-TPV\bin\HolaSDLDebug.exe
-     1>Done Building Project "C:\hlocal\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" (Build target(s)).
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(8): error C2504: 'ObjetoPG' : clase base sin definir
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(10): error C2061: error de sintaxis : identificador 'juegoPG'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.cpp(21): error C3867: 'juegoPG::getRender': falta la lista de argumentos de la llamada a la función; utilice '&juegoPG::getRender' para crear un puntero al miembro
+         MariposaPG.cpp
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(8): error C2504: 'ObjetoPG' : clase base sin definir
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(10): error C2061: error de sintaxis : identificador 'juegoPG'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
+         mainP1.cpp
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(26): error C2146: error de sintaxis : falta ';' delante del identificador 'texturas'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(10): error C2061: error de sintaxis : identificador 'juegoPG'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
+         juegoPG.cpp
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(26): error C2146: error de sintaxis : falta ';' delante del identificador 'texturas'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetopg.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(10): error C2061: error de sintaxis : identificador 'juegoPG'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\globospg.h(18): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(12): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(13): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(14): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(65): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(67): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(67): error C2227: el operando izquierdo de '->load' debe señalar al tipo class/struct/union/generic
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(68): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(76): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(85): error C2259: ObjetoJuego' : no se puede crear una instancia de una clase abstract
+                 debido a los siguientes miembros:
+                 'void ObjetoJuego::draw(void)' : es abstracto
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetojuego.h(10) : vea la declaración de 'ObjetoJuego::draw'
+                 'void ObjetoJuego::update(void)' : es abstracto
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetojuego.h(11) : vea la declaración de 'ObjetoJuego::update'
+                 'bool ObjetoJuego::onClick(void)' : es abstracto
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetojuego.h(12) : vea la declaración de 'ObjetoJuego::onClick'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(85): error C2065: 't' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(85): error C2661: 'ObjetoJuego::ObjetoJuego' : ninguna función sobrecargada acepta 2 argumentos
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(92): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(109): error C2065: 'globos' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(111): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(112): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(124): error C2065: 'ptexture' : identificador no declarado
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(124): error C2227: el operando izquierdo de '->draw' debe señalar al tipo class/struct/union/generic
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(140): error C2039: 'getPuntos' : no es un miembro de 'ObjetoJuego'
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\objetojuego.h(3) : vea la declaración de 'ObjetoJuego'
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(149): error C2451: la expresión condicional de tipo 'void' no es válida
+                 Las expresiones de tipo void no se pueden convertir en otros tipos
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.cpp(243): error C2065: 'ptexture' : identificador no declarado
+         GlobosPG.cpp
+     1>c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(22): error C2535: 'void juegoPG::getMousePos(int &,int &) const' : función miembro ya definida o declarada
+                 c:\users\blanca\documents\universidad\tpv\practica 2\practica2-tpv\holasdl\juegopg.h(21) : vea la declaración de 'juegoPG::getMousePos'
+         Generando código...
+     1>Compilación del proyecto terminada "C:\Users\Blanca\Documents\Universidad\TPV\Practica 2\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" (Build destinos) -- ERROR.
 
-Build succeeded.
+ERROR al compilar.
 
-Time Elapsed 00:00:01.10
+Tiempo transcurrido 00:00:03.03
