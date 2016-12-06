@@ -3,6 +3,10 @@
 #include "TexturasSDL.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include "PremioPG.h"
+#include "MariposaPG.h"
+#include "GlobosPG.h"
 #include "ObjetoPG.h"
 using namespace std;
 
@@ -68,6 +72,7 @@ bool juegoPG::initFondo(){
 	return (ptexture[2] != nullptr);
 }
 bool juegoPG::initGlobos() {
+	objetos.resize(dim);
 	//declaras variables aleatorias x e y que indican la posicion de cada globo
 	int x;
 	int y;
@@ -217,8 +222,6 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 	//hay que añadir atributos para la posicion del raton (debe actualizarse en onClick)
 	mpx = x;
 	mpy = y;
-	
-
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
@@ -232,8 +235,9 @@ void juegoPG::newPuntos(int puntuacion) {
 void juegoPG::newPremio() {
 	// tiene dos parametros x e y donde se genrerará el nuevo premio
 	x = rand() % 450;
-	y = rand() % 450
+	y = rand() % 450;
 	
+	objetos.push_back(new PremioPG(this, x, y));
 }
 //--------------------------------------------------------------------------------//
 

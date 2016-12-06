@@ -6,7 +6,7 @@
 // Practica realizada por Blanca Macazaga Zuazo y Adrián Alcántara Delgado
 #include <vector>
 
-const int dim = 10; //10; //dimension del array de los globos
+int dim = 10; //10; //dimension del array de los globos
 
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
@@ -51,7 +51,7 @@ private:
 	SDL_Window* pWindow;
 	SDL_Renderer* pRenderer;
 	bool pausa; //para pausar la actualizacion de los globos
-	ObjetoJuego* objetos[dim]; //array de los objetos
+	vector <ObjetoJuego*> objetos; //array de los objetos
 	int numG; //numero de globos
 	TexturasSDL* texturas[numText];
 	int x; //para las posiciones del raton
