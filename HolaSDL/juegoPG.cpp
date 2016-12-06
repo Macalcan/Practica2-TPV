@@ -231,8 +231,8 @@ void juegoPG::newPuntos(ObjetoJuego* po) {
 		// llamamos a getPuntos
 }
 //--------------------------------------------------------------------------------//
-void juegoPG::newPremio(ObjetoJuego* po) {
-	po->update();
+void juegoPG::newPremio() {
+	//po->update();
 }
 //--------------------------------------------------------------------------------//
 

@@ -4,9 +4,10 @@
 
 MariposaPG::MariposaPG(juegoPG* juego, int &px, int &py)
 {
-	x = px;
+	x = px; //posiciones x e y de la mariposa
 	y = py;
-	contClicks = 0;
+	game = juego; //puntero a juego
+	contClicks = 0; //aun no se le ha dado ningun click
 	frame = (frame % 6) + 1; //modificar segun la imagen de la mariposa
 }
 
@@ -20,20 +21,20 @@ void MariposaPG::draw() {
 }
 //--------------------------------------------------------------------------------//
 void MariposaPG::update() {
-	if (onClick){
+	if (onClick){ //si se hace click en la mariposa se cambia esta de posicion 
 		x = rand() % 450;
 		y = rand() % 450;
-		contClicks++;
+		contClicks++; //sumamos uno a los clicks para que al llegar a tres tengamos un nuevo premio
 	}
 
 	if (contClicks == 3){
-		contClicks = 0;
-		//crea premio
+		contClicks = 0; //contador a 0 para volver a contar los clicks para un nuevo premio
+		game->newPremio(); //crea premio
 	}
 }
 //--------------------------------------------------------------------------------//
 bool MariposaPG::onClick() {
-	return dentro(x, y);
+	return dentro(x, y); //si se hace click en mariposa devuelve true sino false
 }
 //--------------------------------------------------------------------------------//
 

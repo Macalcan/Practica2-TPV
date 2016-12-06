@@ -17,5 +17,6 @@ private:
 	int x;
 	int y;
 	int frame;
+	juegoPG* game;
 };
 
