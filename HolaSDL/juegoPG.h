@@ -22,7 +22,7 @@ public:
 	void getMousePos(int & mpx, int & mpy) const;
 	// los new van a necesitar hacer casting de clase dynamic_cast
 	void newBaja(ObjetoJuego* po);
-	void newPuntos(ObjetoJuego* po);
+	void newPuntos(int puntuacion);
 	void newPremio();
 	
 	bool explotados[dim]; //array para saber que globos han sido explotados o desinflados

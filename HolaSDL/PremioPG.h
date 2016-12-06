@@ -13,7 +13,7 @@ public:
 	~PremioPG();
 
 private:
-	int x;
-	int y;
+	
+	int puntos;
 };
 

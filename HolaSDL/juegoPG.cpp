@@ -82,7 +82,7 @@ bool juegoPG::initGlobos() {
 	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos[i] = new ObjetoJuego(t[i%2], x, y); //cada globo tendrá la textura 0 o la textura 1
+		objetos[i] = new ObjetoJuego(/*t[i%2], x, y*/); //cada globo tendrá la textura 0 o la textura 1
 		explotados[i] = false; //aun no ha sido explotado
 	}
 	
@@ -222,17 +222,18 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
-
-
+	po -> ~ObjetoJuego();
 }
 //--------------------------------------------------------------------------------//
-void juegoPG::newPuntos(ObjetoJuego* po) {
-	if (po->onClick()) {}
-		// llamamos a getPuntos
+void juegoPG::newPuntos(int puntuacion) {
+	puntos += puntuacion;
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPremio() {
-	//po->update();
+	// tiene dos parametros x e y donde se genrerará el nuevo premio
+	x = rand() % 450;
+	y = rand() % 450
+	
 }
 //--------------------------------------------------------------------------------//
 

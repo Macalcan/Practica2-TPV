@@ -57,6 +57,7 @@ void GlobosPG::update(){
 		
 	}
 }
+
 //getter de puntos del globo
 int GlobosPG::getPuntos(){
 	return puntos;

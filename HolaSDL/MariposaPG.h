@@ -14,8 +14,6 @@ public:
 
 private: 
 	int contClicks;
-	int x;
-	int y;
 	int frame;
 	juegoPG* game;
 };

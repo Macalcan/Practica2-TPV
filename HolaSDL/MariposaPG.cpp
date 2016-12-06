@@ -6,6 +6,7 @@ MariposaPG::MariposaPG(juegoPG* juego, int &px, int &py)
 {
 	x = px; //posiciones x e y de la mariposa
 	y = py;
+	alto = ancho = 100;
 	game = juego; //puntero a juego
 	contClicks = 0; //aun no se le ha dado ningun click
 	frame = (frame % 6) + 1; //modificar segun la imagen de la mariposa
