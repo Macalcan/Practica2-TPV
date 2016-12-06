@@ -15,7 +15,7 @@ public:
 	~GlobosPG();
 
 private:
-	juegoPG* game;
+	
 	static const int PVIS = 70; 
 	static const int PDES = 30;
 	int puntos; //puntos del globo
