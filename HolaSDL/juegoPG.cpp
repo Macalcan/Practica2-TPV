@@ -13,9 +13,7 @@ using namespace std;
 juegoPG::juegoPG()
 {
 	srand(SDL_GetTicks());
-	ptexture [0] = nullptr; //texturas de los globos
-	ptexture [1] = nullptr;
-	ptexture[2] = nullptr; //textura del fondo
+	
 
 	SDL_Window * pWindow = nullptr;
 	SDL_Renderer * pRenderer = nullptr;
@@ -64,37 +62,36 @@ bool juegoPG::initSDL() {
 SDL_Renderer* juegoPG::getRender() const {
 	return pRenderer;
 }
+//--------------------------------------------------------------------------------//
 //crea el fondo
 bool juegoPG::initFondo(){
-	ptexture[2] = new TexturasSDL;
 	string file = { "..\\bmps\\sky.jpg" };
-	ptexture[2]->load(pRenderer, file);
-	return (ptexture[2] != nullptr);
+	getTextura(TFondo)->load(pRenderer, file);
+	return (getTextura(TFondo) != nullptr);
 }
-bool juegoPG::initGlobos() {
+//--------------------------------------------------------------------------------//
+bool juegoPG::initObjetos() {
 	objetos.resize(dim);
 	//declaras variables aleatorias x e y que indican la posicion de cada globo
 	int x;
 	int y;
+
 	//inicializa las texturas de los globos
-	for (int j = 0; j < 2; j++){
-		ptexture [j] = new TexturasSDL;
-	}
-	
-	//carga las texturas de los globos
-	//TGloboN = getTextura(TGloboN);
-	
-	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
+	getTextura(TGloboM);
+	getTextura(TGloboN);
+	getTextura(Tmariposa);
+
+	for (int i = 0; i < dim - 1; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos[i] = new ObjetoJuego(/*t[i%2], x, y*/); //cada globo tendrá la textura 0 o la textura 1
-		explotados[i] = false; //aun no ha sido explotado
+		objetos[i] = new GlobosPG(this, x, y); //cada globo tendrá la textura 0 o la textura 1
 	}
+	objetos[dim - 1] = new MariposaPG(this, x, y);
 	
 	
-	
-	numG = dim; //numero total de globos al principio del juego
-	return (ptexture[0] != nullptr && ptexture[1] != nullptr);
+	numG = dim-1; //numero total de globos al principio del juego
+	//return (ptexture[0] != nullptr && ptexture[1] != nullptr);
+	return true;
 }
 
 //--------------------------------------------------------------------------------//
@@ -108,10 +105,10 @@ void juegoPG::closeSDL() {
 	SDL_Quit();
 }
 //--------------------------------------------------------------------------------//
-void juegoPG::freeGlobos() {
+void juegoPG::freeObjetos() {// creemos que no hace falta
 	//destruye el array de los globos
 	for (int i = 0; i < dim; i++)
-		delete globos[i];
+		delete objetos[i];
 	//destruye las texturas de los globos
 	delete(ptexture[0]);
 	delete(ptexture[1]);
@@ -120,13 +117,13 @@ void juegoPG::freeGlobos() {
 //--------------------------------------------------------------------------------//
 //dibuja los globos que estan visibles, para ello deberia hacer probablemente un for recorriendo todos los globos y accediendo a su atributo visible,
 //en caso de que el globo lo sea se dibuja con draw(pRenderer), pRenderer está declarado arriba pero no asginado
-void juegoPG::render()const {
+void juegoPG::render() const {
 
 	SDL_RenderClear(pRenderer); //"limpia" el render donde vamos a dibujar el siguiente frame
 	
 	SDL_Rect rect; //rect para el fondo
 	rect = {0, 0, ancho, alto};
-	ptexture[2]->draw(pRenderer, rect); //dibuja el fondo
+	getTextura(TFondo)->draw(pRenderer, rect); //dibuja el fondo
 
 	for (int i = 0; i < dim; i++){ //dibuja los globos
 		objetos[i]->draw();
@@ -142,7 +139,6 @@ void juegoPG::onClick(){
 	bool click = false;
 	for (int i = dim; i >= 0 && (!click); i--){
 		if (objetos[i]->onClick()){
-			puntos += objetos[i]->getPuntos();
 			click = true;
 		}
 	}
@@ -150,10 +146,8 @@ void juegoPG::onClick(){
 //--------------------------------------------------------------------------------//
 //recorre todos los globos actualizandolos y comprobando si se han desinflado o explotado, y por lo tanto no son visibles
 void juegoPG::update() {
-	for (int i = 0; i < dim; i++) {
-		if (objetos[i]->update()){ //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
-			numG--;
-		}
+	for (int i = 0; i < objetos.size(); i++) {
+		objetos[i]->update(); //si se ha exlpotado el globo se determina en nuestro array de booleanos y desciende el numero de globos
 	}
 }
 //--------------------------------------------------------------------------------//
@@ -226,6 +220,8 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
 	po -> ~ObjetoJuego();
+
+	//queremos saber si lo que destruimos es un globo
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPuntos(int puntuacion) {
@@ -244,7 +240,7 @@ void juegoPG::newPremio() {
 juegoPG::~juegoPG()
 {
 	closeSDL();
-	freeGlobos();
+	freeObjetos();
 	delete(ptexture[2]);
 	pWindow = nullptr;
 	pRenderer = nullptr;

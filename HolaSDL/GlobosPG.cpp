@@ -31,7 +31,7 @@ bool GlobosPG::onClick(){
 		invisible = true;
 		return explotado = true;
 		juego->newBaja(this);
-		juego->newPuntos(this);
+		juego->newPuntos(puntos);
 	}
 	else return false;
 }
