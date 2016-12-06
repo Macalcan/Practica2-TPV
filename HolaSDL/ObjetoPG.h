@@ -11,10 +11,8 @@ public:
 	bool dentro(int x, int y) const; //llamara a posMouse de juegoPG
 	virtual void draw();
 	virtual void update();
-private:
 
 protected:
-	
 	
 	// sustituye al puntero a la textura y al renderizador de la clase Globo
 	juegoPG* juego;

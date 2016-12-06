@@ -19,23 +19,19 @@ GlobosPG::GlobosPG(juegoPG* juego, int &px, int &py)
 
 
 //--------------------------------------------------------------------------------//
-void GlobosPG::draw()const{
+void GlobosPG::draw() {
 	if (!invisible){
 		ObjetoPG::draw();
 	}
-	/*if (!invisible){ //en caso de estar visible se dibuja
-		SDL_Rect datBalloon;
-		datBalloon = { x, y, ancho, alto };
-		imagen->draw(pRenderer, datBalloon);
-	}*/
 }
 //--------------------------------------------------------------------------------//
 bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
-	
 	if (dentro(x, y)){
 		invisible = true;
 		return explotado = true;
+		juego->newBaja(this);
+		juego->newPuntos(this);
 	}
 	else return false;
 }
@@ -55,9 +51,10 @@ void GlobosPG::update(){
 			inflado -= 10; //disminuye el "aire" que tiene el globo
 			alto -= 10; //disminuye el tamaño del globo
 			ancho -= 10;
-			puntos += 2;//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
+			//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
+			puntos += 2;
 		}
-		//return false;
+		
 	}
 }
 //getter de puntos del globo

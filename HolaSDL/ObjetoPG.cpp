@@ -19,7 +19,6 @@ void ObjetoPG::draw(){
 	rectObjeto = { x, y, ancho, alto };
 	//puntero de tipo juegoPG que apunta a TexturasSDL, de esta clase cogemos el draw y utilizamos renderer y rect
 	juego->getTextura(texturas)->draw(juego->getRender, rectObjeto);
-	
 }
 
 void ObjetoPG::update() {

@@ -69,14 +69,18 @@
     <ClCompile Include="GlobosPG.cpp" />
     <ClCompile Include="juegoPG.cpp" />
     <ClCompile Include="mainP1.cpp" />
+    <ClCompile Include="MariposaPG.cpp" />
     <ClCompile Include="ObjetoPG.cpp" />
+    <ClCompile Include="PremioPG.cpp" />
     <ClCompile Include="TexturasSDL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobosPG.h" />
     <ClInclude Include="juegoPG.h" />
+    <ClInclude Include="MariposaPG.h" />
     <ClInclude Include="ObjetoJuego.h" />
     <ClInclude Include="ObjetoPG.h" />
+    <ClInclude Include="PremioPG.h" />
     <ClInclude Include="TexturasSDL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
