@@ -8,7 +8,7 @@ GlobosPG::GlobosPG(juegoPG* juego, int &px, int &py)
 	x = px; //posicion en el eje x e y del globo
 	y = py;
 	
-	game = juego; //puntero a la clase juegoPG
+	
 	alto = ancho = 100; //tamaño del globo
 	explotado = false; 
 	invisible = false;
