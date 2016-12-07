@@ -16,6 +16,9 @@ private:
 	int contClicks;
 	int frame;
 	int frameActual;
+	SDL_Rect RFrame;
+	SDL_Rect rectMarip;
 	juegoPG* game;
+	int posx, posy;
 };
 

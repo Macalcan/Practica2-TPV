@@ -9,7 +9,8 @@ class TexturasSDL
 public:
 	TexturasSDL();
 	~TexturasSDL();
-	void draw(SDL_Renderer* pRenderer, SDL_Rect const& rect);
+	void draw(SDL_Renderer* pRenderer, SDL_Rect &rect, SDL_Rect const& RFrame);
+	void draw(SDL_Renderer* pRenderer, SDL_Rect &rect);
 	bool load(SDL_Renderer* pRenderer, string const& nombArch);
 	void rectAnimation(int frames, int frameAct);
 private:
