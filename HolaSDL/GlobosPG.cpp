@@ -3,7 +3,7 @@
 using namespace std;
 
 
-GlobosPG::GlobosPG(juegoPG* juego, int &px, int &py)
+GlobosPG::GlobosPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 {
 	x = px; //posicion en el eje x e y del globo
 	y = py;
@@ -31,7 +31,7 @@ bool GlobosPG::onClick(){
 		invisible = true;
 		return explotado = true;
 		juego->newBaja(this);
-		juego->newPuntos(puntos);
+		juego->newPuntos(this);
 	}
 	else return false;
 }

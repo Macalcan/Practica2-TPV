@@ -2,7 +2,7 @@
 
 
 
-PremioPG::PremioPG(juegoPG* juego, int &px, int &py)
+PremioPG::PremioPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 {
 	x = px;
 	y = py;
@@ -16,7 +16,7 @@ void PremioPG::draw() {
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
 	if (onClick) {
-		juego->newPuntos(puntos);
+		juego->newPuntos(this);
 		juego->newBaja(this);
 	}
 	else {
@@ -29,6 +29,10 @@ bool PremioPG::onClick() {
 	return dentro(x, y);
 }
 //--------------------------------------------------------------------------------//
+//getter de puntos del globo
+int PremioPG::getPuntos() {
+	return puntos;
+}
 
 PremioPG::~PremioPG()
 {

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <typeinfo>
 #include "PremioPG.h"
 #include "MariposaPG.h"
 #include "GlobosPG.h"
@@ -13,7 +14,6 @@ using namespace std;
 juegoPG::juegoPG()
 {
 	srand(SDL_GetTicks());
-	
 
 	SDL_Window * pWindow = nullptr;
 	SDL_Renderer * pRenderer = nullptr;
@@ -24,7 +24,7 @@ juegoPG::juegoPG()
 	pausa = false; //se se pulsa p es true y se para la actualizacion de los globos
 	puntos = 0; //puntos al comenzar el juego
 	initSDL();
-	initGlobos();
+	initObjetos();
 	initFondo();
 	Texturas_t et;
 	
@@ -84,9 +84,12 @@ bool juegoPG::initObjetos() {
 	for (int i = 0; i < dim - 1; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos[i] = new GlobosPG(this, x, y); //cada globo tendrá la textura 0 o la textura 1
+		if (i%2 == 0)
+			objetos[i] = new GlobosPG(this, TGloboM, x, y); //cada globo tendrá la textura 0 o la textura 1
+		else if (i % 2 == 1)
+			objetos[i] = new GlobosPG(this, TGloboN, x, y); //cada globo tendrá la textura 0 o la textura 1
 	}
-	objetos[dim - 1] = new MariposaPG(this, x, y);
+	objetos[dim - 1] = new MariposaPG(this, Tmariposa, x, y);
 	
 	
 	numG = dim-1; //numero total de globos al principio del juego
@@ -105,14 +108,22 @@ void juegoPG::closeSDL() {
 	SDL_Quit();
 }
 //--------------------------------------------------------------------------------//
-void juegoPG::freeObjetos() {// creemos que no hace falta
-	//destruye el array de los globos
-	for (int i = 0; i < dim; i++)
+void juegoPG::freeObjetos() {
+	for (int i = 0; i < dim; i++) {
 		delete objetos[i];
+		objetos[i] = nullptr;
+	}
+	delete (texturas[TGloboN]);
+	texturas[TGloboN] = nullptr;
+	delete (texturas[TGloboM]);
+	texturas[TGloboM] = nullptr;
+	delete (texturas[TFondo]);
+	texturas[TFondo] = nullptr;
+	delete (texturas[Tmariposa]);
+	texturas[Tmariposa] = nullptr;
+	delete (texturas[Tpremio]);
+	texturas[Tpremio] = nullptr;
 	//destruye las texturas de los globos
-	delete(ptexture[0]);
-	delete(ptexture[1]);
-
 }
 //--------------------------------------------------------------------------------//
 //dibuja los globos que estan visibles, para ello deberia hacer probablemente un for recorriendo todos los globos y accediendo a su atributo visible,
@@ -219,13 +230,21 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
-	po -> ~ObjetoJuego();
-
 	//queremos saber si lo que destruimos es un globo
+	if (typeid(*po) == typeid(GlobosPG)) {
+		numG--;
+	}
+
+	else if (typeid(*po) == typeid(PremioPG)) {
+
+	}
 }
 //--------------------------------------------------------------------------------//
-void juegoPG::newPuntos(int puntuacion) {
-	puntos += puntuacion;
+void juegoPG::newPuntos(ObjetoJuego* po) {
+	if (typeid(*po) == typeid(GlobosPG))
+		puntos += dynamic_cast<GlobosPG*>(po)->getPuntos();
+	else if (typeid(*po) == typeid(PremioPG))
+		puntos += dynamic_cast<PremioPG*>(po)->getPuntos();
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPremio() {
@@ -233,7 +252,7 @@ void juegoPG::newPremio() {
 	x = rand() % 450;
 	y = rand() % 450;
 	
-	objetos.push_back(new PremioPG(this, x, y));
+	objetos.push_back(new PremioPG(this, Tpremio, x, y));
 }
 //--------------------------------------------------------------------------------//
 
@@ -241,7 +260,6 @@ juegoPG::~juegoPG()
 {
 	closeSDL();
 	freeObjetos();
-	delete(ptexture[2]);
 	pWindow = nullptr;
 	pRenderer = nullptr;
 }

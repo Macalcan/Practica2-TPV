@@ -6,7 +6,7 @@
 class MariposaPG : public ObjetoPG
 {
 public:
-	MariposaPG(juegoPG* juego, int &px, int &py);
+	MariposaPG(juegoPG* juego, Texturas_t texturas, int &px, int &py);
 	void draw();
 	void update();
 	bool onClick();

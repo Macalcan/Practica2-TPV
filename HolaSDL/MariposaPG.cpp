@@ -2,7 +2,7 @@
 
 
 
-MariposaPG::MariposaPG(juegoPG* juego, int &px, int &py)
+MariposaPG::MariposaPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 {
 	x = px; //posiciones x e y de la mariposa
 	y = py;

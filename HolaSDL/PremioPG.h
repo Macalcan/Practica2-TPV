@@ -6,10 +6,11 @@
 class PremioPG : public ObjetoPG
 {
 public:
-	PremioPG(juegoPG* juego, int &px, int &py);
+	PremioPG(juegoPG* juego, Texturas_t texturas, int &px, int &py);
 	void draw();
 	void update();
 	bool onClick();
+	int getPuntos();
 	~PremioPG();
 
 private:

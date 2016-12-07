@@ -11,7 +11,7 @@ int dim = 10; //10; //dimension del array de los globos
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
 const int numText = 3;
-enum Texturas_t { TFondo, TGloboN, TGloboM, Tmariposa, Tpremio };
+enum Texturas_t {TGloboN, TGloboM, TFondo, Tmariposa, Tpremio };
 
 class juegoPG
 {
@@ -21,7 +21,7 @@ public:
 	void getMousePos(int &mpx, int &mpy)const;
 	// los new van a necesitar hacer casting de clase dynamic_cast
 	void newBaja(ObjetoJuego* po);
-	void newPuntos(int puntuacion);
+	void newPuntos(ObjetoJuego * po);
 	void newPremio();
 	
 	
