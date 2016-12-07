@@ -80,8 +80,17 @@ bool juegoPG::initObjetos() {
 	getTextura(TGloboM);
 	getTextura(TGloboN);
 	getTextura(Tmariposa);
+	getTextura(Tpremio);
 
-	for (int i = 0; i < dim - 1; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
+	x = rand() % 450;
+	y = rand() % 450;
+	objetos[0] = new MariposaPG(this, Tmariposa, x, y);
+
+	x = rand() % 450;
+	y = rand() % 450;
+	objetos[1] = new PremioPG(this, Tpremio, x, y);
+
+	for (int i = 2; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
 		if (i%2 == 0)
@@ -89,12 +98,10 @@ bool juegoPG::initObjetos() {
 		else if (i % 2 == 1)
 			objetos[i] = new GlobosPG(this, TGloboN, x, y); //cada globo tendrá la textura 0 o la textura 1
 	}
-	objetos[dim - 1] = new MariposaPG(this, Tmariposa, x, y);
+
+	numG = dim-2; //numero total de globos al principio del juego
 	
-	
-	numG = dim-1; //numero total de globos al principio del juego
-	//return (ptexture[0] != nullptr && ptexture[1] != nullptr);
-	return true;
+	return (texturas[TGloboN] != nullptr && texturas[TGloboM] != nullptr && texturas[Tmariposa] != nullptr && texturas[Tpremio] != nullptr);
 }
 
 //--------------------------------------------------------------------------------//
@@ -151,6 +158,8 @@ void juegoPG::onClick(){
 	for (int i = dim; i >= 0 && (!click); i--){
 		if (objetos[i]->onClick()){
 			click = true;
+			numG--;
+
 		}
 	}
 }
@@ -232,7 +241,7 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 void juegoPG::newBaja(ObjetoJuego* po) {
 	//queremos saber si lo que destruimos es un globo
 	if (typeid(*po) == typeid(GlobosPG)) {
-		numG--;
+		onClick();
 	}
 
 	else if (typeid(*po) == typeid(PremioPG)) {
