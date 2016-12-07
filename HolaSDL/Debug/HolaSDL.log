@@ -1,13 +1,3 @@
-﻿  TexturasSDL.cpp
-  PremioPG.cpp
-  ObjetoPG.cpp
-  MariposaPG.cpp
-  mainP1.cpp
-  juegoPG.cpp
-c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(150): warning C4018: '<': no coinciden signed/unsigned
-c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(171): warning C4018: '<': no coinciden signed/unsigned
-  GlobosPG.cpp
-  Generando código...
-  LINK : no se encontró C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+﻿  MariposaPG.cpp
   HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.pdb (Full PDB)

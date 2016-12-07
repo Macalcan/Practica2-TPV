@@ -32,12 +32,8 @@ juegoPG::juegoPG()
 	rutasText.emplace_back("..\\bmps\\butterfly.png");
 	rutasText.emplace_back("..\\bmps\\Gift.png");
 	
-	//initFondo();
+	
 	initObjetos();
-	//Texturas_t et;
-	
-
-	
 }
 //--------------------------------------------------------------------------------//
 bool juegoPG::initSDL() {
@@ -73,14 +69,6 @@ SDL_Renderer* juegoPG::getRender() const {
 	return pRenderer;
 }
 //--------------------------------------------------------------------------------//
-//crea el fondo
-bool juegoPG::initFondo(){
-
-//	texturas[TFondo] = new TexturasSDL;
-	//texturas[TFondo]->load(pRenderer, rutasText[0]);//rutasText[0]);
-	return (texturas[TFondo] != nullptr);
-}
-//--------------------------------------------------------------------------------//
 bool juegoPG::initObjetos() {
 	//declaras variables aleatorias x e y que indican la posicion de cada globo
 	int x;
@@ -92,11 +80,6 @@ bool juegoPG::initObjetos() {
 		texturas[i]->load(pRenderer, rutasText[i]);
 	}
 	
-	
-	x = rand() % 450;
-	y = rand() % 450;
-//	objetos[0] = new MariposaPG(this, Tmariposa, x, y);
-
 
 	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
@@ -104,7 +87,11 @@ bool juegoPG::initObjetos() {
 		objetos.emplace_back( new GlobosPG(this, TGloboN, x, y)); //cada globo tendrá la textura 0 o la textura 1
 	}
 
+	x = rand() % 450;
+	y = rand() % 450;
+
 	numG = dim; //numero total de globos al principio del juego
+	objetos.emplace_back(new MariposaPG(this, Tmariposa, x, y));
 	
 	return (texturas[TGloboN] != nullptr || texturas[Tmariposa] != nullptr || texturas[Tpremio] != nullptr);
 }

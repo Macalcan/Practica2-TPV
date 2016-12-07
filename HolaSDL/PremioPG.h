@@ -14,7 +14,7 @@ public:
 	~PremioPG();
 
 private:
-	
+	juegoPG* game;
 	int puntos;
 };
 

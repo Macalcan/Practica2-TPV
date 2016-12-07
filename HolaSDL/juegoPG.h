@@ -39,7 +39,6 @@ private:
 	void onClick();
 	void update();
 	void handle_event();
-	bool initFondo();
 
 	std::vector<std::string> rutasText;	
 	
