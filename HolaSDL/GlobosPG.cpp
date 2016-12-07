@@ -3,12 +3,12 @@
 using namespace std;
 
 
-GlobosPG::GlobosPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
+GlobosPG::GlobosPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
 {
-	texturas = TGloboN;
+	texturasa = texturas;
 	x = px; //posicion en el eje x e y del globo
 	y = py;
-	
+	juego = jueg;
 	game = juego; //puntero a la clase juegoPG
 	alto = ancho = 100; //tamaño del globo
 	explotado = false; 
@@ -24,19 +24,24 @@ void GlobosPG::draw() {
 	rectObjeto = { x, y, ancho, alto };
 	if (!invisible){
 		//ObjetoPG::draw();
-		game->getTextura(texturas)->draw(game->getRender(), rectObjeto);
+		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
 	}
 }
 //--------------------------------------------------------------------------------//
 bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
-	if (dentro(x, y)){
+	int mpx, mpy;
+	mpx = mpy = 0;
+	juego->getMousePos(mpx, mpy);
+	if (dentro(mpx, mpy)){
 		invisible = true;
-		return explotado = true;
+		explotado = true;
 		juego->newBaja(this);
 		juego->newPuntos(this);
+		return true;
 	}
-	else return false;
+	return false;
+	
 }
 //--------------------------------------------------------------------------------//
 //actualiza el globo

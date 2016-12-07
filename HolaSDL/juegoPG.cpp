@@ -25,16 +25,14 @@ juegoPG::juegoPG()
 	puntos = 0; //puntos al comenzar el juego
 	initSDL();
 	//metemos las rutas de texturas
-	string file = { "..\\bmps\\sky.jpg" };
-	rutasText[0] = file;
-	file = { "..\\bmps\\globoN.png" };
-	rutasText[1] = file;
-	file = { "..\\bmps\\butterfly.png" };
-	rutasText[2] = file;
-	file = { "..\\bmps\\Gift.png" };
-	rutasText[3] = file;
 
-	initFondo();
+
+	rutasText.emplace_back("..\\bmps\\sky.jpg");
+	rutasText.emplace_back("..\\bmps\\globoN.png");
+	rutasText.emplace_back("..\\bmps\\butterfly.png");
+	rutasText.emplace_back("..\\bmps\\Gift.png");
+	
+	//initFondo();
 	initObjetos();
 	//Texturas_t et;
 	
@@ -77,36 +75,33 @@ SDL_Renderer* juegoPG::getRender() const {
 //--------------------------------------------------------------------------------//
 //crea el fondo
 bool juegoPG::initFondo(){
-	string file = { "..\\bmps\\sky.jpg" };
-	texturas[TFondo] = new TexturasSDL;
-	texturas[TFondo]->load(pRenderer, rutasText[0]);//rutasText[0]);
+
+//	texturas[TFondo] = new TexturasSDL;
+	//texturas[TFondo]->load(pRenderer, rutasText[0]);//rutasText[0]);
 	return (texturas[TFondo] != nullptr);
 }
 //--------------------------------------------------------------------------------//
 bool juegoPG::initObjetos() {
-	objetos.resize(dim + 1);
 	//declaras variables aleatorias x e y que indican la posicion de cada globo
 	int x;
 	int y;
 
 	//inicializa las texturas de los globos
-	texturas[TGloboN] = new TexturasSDL;
-	texturas[TGloboN]->load(pRenderer, rutasText[1]);
-	texturas[Tmariposa] = new TexturasSDL;
-	texturas[Tmariposa]->load(pRenderer, rutasText[2]);
-	texturas[Tpremio] = new TexturasSDL;
-	texturas[Tpremio]->load(pRenderer, rutasText[3]);
+	for (int i = 0; i < 4; i++) {
+		texturas.emplace_back(new TexturasSDL());
+		texturas[i]->load(pRenderer, rutasText[i]);
+	}
 	
 	
 	x = rand() % 450;
 	y = rand() % 450;
-	objetos[0] = new MariposaPG(this, Tmariposa, x, y);
+//	objetos[0] = new MariposaPG(this, Tmariposa, x, y);
 
 
-	for (int i = 1; i < objetos.size(); i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
+	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos[i] = new GlobosPG(this, TGloboN, x, y); //cada globo tendrá la textura 0 o la textura 1
+		objetos.emplace_back( new GlobosPG(this, TGloboN, x, y)); //cada globo tendrá la textura 0 o la textura 1
 	}
 
 	numG = dim; //numero total de globos al principio del juego
@@ -150,7 +145,7 @@ void juegoPG::render() const {
 	
 	SDL_Rect rect; //rect para el fondo
 	rect = {0, 0, ancho, alto};
-	//texturas[TFondo]->draw(pRenderer, rect); //dibuja el fondo
+	texturas[TFondo]->draw(pRenderer, rect); //dibuja el fondo
 
 	for (int i = 0; i < objetos.size(); i++){ //dibuja los globos
 		objetos[i]->draw();
@@ -164,7 +159,7 @@ void juegoPG::render() const {
 //a los puntos conseguidos en total
 void juegoPG::onClick(){
 	bool click = false;
-	for (int i = dim; i >= 0 && (!click); i--){
+	for (int i = dim-1; i >= 0 && (!click); i--){
 		if (objetos[i]->onClick()){
 			click = true;
 		}
@@ -185,8 +180,8 @@ void juegoPG::handle_event() {
 		else if (e.type == SDL_MOUSEBUTTONUP) {
 			if (e.button.button == SDL_BUTTON_LEFT) {
 				cout << "CLICK";
-				x = e.button.x;
-				y = e.button.y;
+				mx = e.button.x;
+				my = e.button.y;
 				onClick();
 			}
 		}
@@ -208,7 +203,7 @@ void juegoPG::run()
 		cout << "Play \n";
 		Uint32 lastUpdate = SDL_GetTicks();
 		string puntuacion = "preparado!!?? ";
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Practica1", puntuacion.c_str(), nullptr);
+		//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Practica1", puntuacion.c_str(), nullptr);
 		
 		render();
 		handle_event();
@@ -241,8 +236,8 @@ void juegoPG::run()
 //--------------------------------------------------------------------------------//
 void juegoPG::getMousePos(int &mpx, int &mpy) const {
 	//hay que añadir atributos para la posicion del raton (debe actualizarse en onClick)
-	mpx = x;
-	mpy = y;
+	mpx = mx;
+	mpy = my;
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {

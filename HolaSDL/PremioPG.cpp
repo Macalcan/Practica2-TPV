@@ -2,9 +2,9 @@
 
 
 
-PremioPG::PremioPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
+PremioPG::PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py)
 {
-	texturas = Tpremio;
+	texturasa = texturas;
 	x = px;
 	y = py;
 	alto = ancho = 50;
@@ -12,22 +12,24 @@ PremioPG::PremioPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 }
 
 void PremioPG::draw() {
-	rectObjeto = {x, y, ancho, alto};
+//	rectObjeto = {x, y, ancho, alto};
 	ObjetoPG::draw();
 }
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
-	if (onClick()) {
-		juego->newPuntos(this);
-		juego->newBaja(this);
-	}
-	else {
-		puntos = puntos - 5;
+		puntos = puntos + 5;
 		if (puntos <= 0) juego->newBaja(this);
-	}
+	
 }
 //--------------------------------------------------------------------------------//
 bool PremioPG::onClick() {
+	int x, y;
+	juego->getMousePos(x, y);
+	if (dentro(x, y)) {
+		juego->newPuntos(this);
+		juego->newBaja(this);
+	}
+
 	return dentro(x, y);
 }
 //--------------------------------------------------------------------------------//

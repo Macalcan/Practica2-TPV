@@ -23,6 +23,6 @@ protected:
 	int alto;
 	int ancho;
 	SDL_Rect rectObjeto;
-	Texturas_t texturas;
+	juegoPG::Texturas_t texturasa;
 };
 

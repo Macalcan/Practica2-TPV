@@ -9,7 +9,7 @@
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
 const int numText = 4;
-enum Texturas_t { TFondo, TGloboN, Tmariposa, Tpremio };
+
 
 class juegoPG
 {
@@ -22,7 +22,7 @@ public:
 	void newPuntos(ObjetoJuego * po);
 	void newPremio();
 	
-	
+	enum Texturas_t { TFondo, TGloboN, Tmariposa, Tpremio };
 	SDL_Renderer* getRender()const;
 	TexturasSDL* getTextura(Texturas_t et) const { return texturas[et]; } //metodo inline
 	
@@ -41,7 +41,7 @@ private:
 	void handle_event();
 	bool initFondo();
 
-	string rutasText [numText];	
+	std::vector<std::string> rutasText;	
 	
 	int puntos;
 	
@@ -51,9 +51,10 @@ private:
 	bool pausa; //para pausar la actualizacion de los globos
 	vector <ObjetoJuego*> objetos; //array de los objetos
 	int numG; //numero de globos
-	TexturasSDL* texturas[numText];
+	std::vector<TexturasSDL*> texturas;
 	int x; //para las posiciones del raton
 	int y; //para las posiciones del raton
+	int mx, my;
 	
 };
 
