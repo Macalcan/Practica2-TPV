@@ -44,6 +44,9 @@ void TexturasSDL::draw(SDL_Renderer* pRenderer, SDL_Rect const& rect){
 
 }
 //--------------------------------------------------------------------------------//
+void TexturasSDL::rectAnimation(int frames, int framesAct){
+	SDL_Rect rect = { ancho / frames * framesAct % frames, 0, ancho / frames, alto};
+}
 //carga una imagen en una superficie
 SDL_Surface* TexturasSDL::loadFile(string file)
 {

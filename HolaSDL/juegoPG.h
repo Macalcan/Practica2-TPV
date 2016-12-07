@@ -5,12 +5,11 @@
 // Practica realizada por Blanca Macazaga Zuazo y Adrián Alcántara Delgado
 #include <vector>
 
-int dim = 10; //10; //dimension del array de los globos
 
 const int ancho = 550; //dimensiones de la ventana del juego
 const int alto = 600;
-const int numText = 3;
-enum Texturas_t {TGloboN, TGloboM, TFondo, Tmariposa, Tpremio };
+const int numText = 4;
+enum Texturas_t { TFondo, TGloboN, Tmariposa, Tpremio };
 
 class juegoPG
 {
@@ -30,6 +29,8 @@ public:
 	~juegoPG();
 
 private:
+	int dim = 10; //10; //dimension del array de los globos
+
 	bool initSDL();
 	void closeSDL();
 	bool initObjetos();

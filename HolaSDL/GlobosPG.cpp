@@ -5,6 +5,7 @@ using namespace std;
 
 GlobosPG::GlobosPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 {
+	texturas = TGloboN;
 	x = px; //posicion en el eje x e y del globo
 	y = py;
 	
@@ -20,8 +21,10 @@ GlobosPG::GlobosPG(juegoPG* juego, Texturas_t texturas, int &px, int &py)
 
 //--------------------------------------------------------------------------------//
 void GlobosPG::draw() {
+	rectObjeto = { x, y, ancho, alto };
 	if (!invisible){
-		ObjetoPG::draw();
+		//ObjetoPG::draw();
+		game->getTextura(texturas)->draw(game->getRender(), rectObjeto);
 	}
 }
 //--------------------------------------------------------------------------------//

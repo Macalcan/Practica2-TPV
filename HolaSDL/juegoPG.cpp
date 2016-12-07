@@ -24,9 +24,21 @@ juegoPG::juegoPG()
 	pausa = false; //se se pulsa p es true y se para la actualizacion de los globos
 	puntos = 0; //puntos al comenzar el juego
 	initSDL();
-	initObjetos();
+	//metemos las rutas de texturas
+	string file = { "..\\bmps\\sky.jpg" };
+	rutasText[0] = file;
+	file = { "..\\bmps\\globoN.png" };
+	rutasText[1] = file;
+	file = { "..\\bmps\\butterfly.png" };
+	rutasText[2] = file;
+	file = { "..\\bmps\\Gift.png" };
+	rutasText[3] = file;
+
 	initFondo();
-	Texturas_t et;
+	initObjetos();
+	//Texturas_t et;
+	
+
 	
 }
 //--------------------------------------------------------------------------------//
@@ -66,42 +78,40 @@ SDL_Renderer* juegoPG::getRender() const {
 //crea el fondo
 bool juegoPG::initFondo(){
 	string file = { "..\\bmps\\sky.jpg" };
-	getTextura(TFondo)->load(pRenderer, file);
-	return (getTextura(TFondo) != nullptr);
+	texturas[TFondo] = new TexturasSDL;
+	texturas[TFondo]->load(pRenderer, rutasText[0]);//rutasText[0]);
+	return (texturas[TFondo] != nullptr);
 }
 //--------------------------------------------------------------------------------//
 bool juegoPG::initObjetos() {
-	objetos.resize(dim);
+	objetos.resize(dim + 1);
 	//declaras variables aleatorias x e y que indican la posicion de cada globo
 	int x;
 	int y;
 
 	//inicializa las texturas de los globos
-	getTextura(TGloboM);
-	getTextura(TGloboN);
-	getTextura(Tmariposa);
-	getTextura(Tpremio);
-
+	texturas[TGloboN] = new TexturasSDL;
+	texturas[TGloboN]->load(pRenderer, rutasText[1]);
+	texturas[Tmariposa] = new TexturasSDL;
+	texturas[Tmariposa]->load(pRenderer, rutasText[2]);
+	texturas[Tpremio] = new TexturasSDL;
+	texturas[Tpremio]->load(pRenderer, rutasText[3]);
+	
+	
 	x = rand() % 450;
 	y = rand() % 450;
 	objetos[0] = new MariposaPG(this, Tmariposa, x, y);
 
-	x = rand() % 450;
-	y = rand() % 450;
-	objetos[1] = new PremioPG(this, Tpremio, x, y);
 
-	for (int i = 2; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
+	for (int i = 1; i < objetos.size(); i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		if (i%2 == 0)
-			objetos[i] = new GlobosPG(this, TGloboM, x, y); //cada globo tendrá la textura 0 o la textura 1
-		else if (i % 2 == 1)
-			objetos[i] = new GlobosPG(this, TGloboN, x, y); //cada globo tendrá la textura 0 o la textura 1
+		objetos[i] = new GlobosPG(this, TGloboN, x, y); //cada globo tendrá la textura 0 o la textura 1
 	}
 
-	numG = dim-2; //numero total de globos al principio del juego
+	numG = dim; //numero total de globos al principio del juego
 	
-	return (texturas[TGloboN] != nullptr && texturas[TGloboM] != nullptr && texturas[Tmariposa] != nullptr && texturas[Tpremio] != nullptr);
+	return (texturas[TGloboN] != nullptr || texturas[Tmariposa] != nullptr || texturas[Tpremio] != nullptr);
 }
 
 //--------------------------------------------------------------------------------//
@@ -120,10 +130,9 @@ void juegoPG::freeObjetos() {
 		delete objetos[i];
 		objetos[i] = nullptr;
 	}
+	//delete de las rutas de codigo
 	delete (texturas[TGloboN]);
 	texturas[TGloboN] = nullptr;
-	delete (texturas[TGloboM]);
-	texturas[TGloboM] = nullptr;
 	delete (texturas[TFondo]);
 	texturas[TFondo] = nullptr;
 	delete (texturas[Tmariposa]);
@@ -141,9 +150,9 @@ void juegoPG::render() const {
 	
 	SDL_Rect rect; //rect para el fondo
 	rect = {0, 0, ancho, alto};
-	getTextura(TFondo)->draw(pRenderer, rect); //dibuja el fondo
+	//texturas[TFondo]->draw(pRenderer, rect); //dibuja el fondo
 
-	for (int i = 0; i < dim; i++){ //dibuja los globos
+	for (int i = 0; i < objetos.size(); i++){ //dibuja los globos
 		objetos[i]->draw();
 	}
 
@@ -158,8 +167,6 @@ void juegoPG::onClick(){
 	for (int i = dim; i >= 0 && (!click); i--){
 		if (objetos[i]->onClick()){
 			click = true;
-			numG--;
-
 		}
 	}
 }
@@ -241,11 +248,11 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 void juegoPG::newBaja(ObjetoJuego* po) {
 	//queremos saber si lo que destruimos es un globo
 	if (typeid(*po) == typeid(GlobosPG)) {
-		onClick();
+		numG--;
 	}
 
 	else if (typeid(*po) == typeid(PremioPG)) {
-
+		delete objetos[objetos.size() - 1];
 	}
 }
 //--------------------------------------------------------------------------------//
@@ -260,7 +267,7 @@ void juegoPG::newPremio() {
 	// tiene dos parametros x e y donde se genrerará el nuevo premio
 	x = rand() % 450;
 	y = rand() % 450;
-	
+	getTextura(Tpremio);
 	objetos.push_back(new PremioPG(this, Tpremio, x, y));
 }
 //--------------------------------------------------------------------------------//

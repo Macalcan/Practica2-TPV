@@ -11,6 +11,7 @@ public:
 	~TexturasSDL();
 	void draw(SDL_Renderer* pRenderer, SDL_Rect const& rect);
 	bool load(SDL_Renderer* pRenderer, string const& nombArch);
+	void rectAnimation(int frames, int frameAct);
 private:
 	int alto; //alto de la superficie de la textura
 	int ancho; //ancho de la superficie de la textura
