@@ -6,7 +6,7 @@
 class PremioPG : public ObjetoPG
 {
 public:
-	PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py);
+	PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py);
 	void draw();
 	void update();
 	bool onClick();

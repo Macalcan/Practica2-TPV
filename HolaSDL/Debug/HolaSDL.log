@@ -1,1 +1,5 @@
-﻿
+﻿  juegoPG.cpp
+c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(138): warning C4018: '<': no coinciden signed/unsigned
+c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(163): warning C4018: '<': no coinciden signed/unsigned
+  HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.pdb (Full PDB)

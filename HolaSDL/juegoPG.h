@@ -29,21 +29,11 @@ public:
 	~juegoPG();
 
 private:
-	int dim = 10; //10; //dimension del array de los globos
 
-	bool initSDL();
-	void closeSDL();
-	bool initObjetos();
-	void freeObjetos();
-	void render() const;
-	void onClick();
-	void update();
-	void handle_event();
+	std::vector<std::string> rutasText;
 
-	std::vector<std::string> rutasText;	
-	
 	int puntos;
-	
+
 	bool error, gameOver, exit;
 	SDL_Window* pWindow;
 	SDL_Renderer* pRenderer;
@@ -54,6 +44,19 @@ private:
 	int x; //para las posiciones del raton
 	int y; //para las posiciones del raton
 	int mx, my;
+
+	int dim = 10; //10; //dimension del array de los globos
+
+	bool initSDL();
+	void closeSDL();
+	bool initObjetos();
+	void freeObjetos();
+	void render() const;
+	void onClick(int pmx, int pmy);
+	void update();
+	void handle_event();
+
+	
 	
 };
 

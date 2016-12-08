@@ -3,7 +3,7 @@
 using namespace std;
 
 
-MariposaPG::MariposaPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py)
+MariposaPG::MariposaPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py)
 {
 	texturasa = texturas;
 	rectMarip = rectObjeto;
@@ -54,10 +54,7 @@ void MariposaPG::update() {
 //--------------------------------------------------------------------------------//
 bool MariposaPG::onClick() {
 	
-	int mpx, mpy;
-	mpx = mpy = 0;
-	juego->getMousePos(mpx, mpy);
-	if (dentro(mpx, mpy)) {
+	if (ObjetoPG::onClick()) {
 		contClicks++; //sumamos uno a los clicks para que al llegar a tres tengamos un nuevo premio
 		rectMarip.x = rand() % 450;
 		rectMarip.y = rand() % 450;

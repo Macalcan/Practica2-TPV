@@ -29,14 +29,11 @@ void GlobosPG::draw() {
 //--------------------------------------------------------------------------------//
 bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
-	int mpx, mpy;
-	mpx = mpy = 0;
-	game->getMousePos(mpx, mpy);
-	if (dentro(mpx, mpy)){
+	if (ObjetoPG::onClick()){
 		invisible = true;
 		explotado = true;
-		juego->newBaja(this);
-		juego->newPuntos(this);
+		game->newBaja(this);
+		game->newPuntos(this);
 		return true;
 	}
 	else return false;

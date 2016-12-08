@@ -145,7 +145,9 @@ void juegoPG::render() const {
 //--------------------------------------------------------------------------------//
 //comprueba si al hacer click ha explotado el globo a traves del metodo onClick de GlobosPG y si lo ha explotado saca los puntos del globo y los suma
 //a los puntos conseguidos en total
-void juegoPG::onClick(){
+void juegoPG::onClick(int pmx, int pmy) {
+	mx = pmx;
+	my = pmy;
 	bool click = false;
 	for (int i = objetos.size() - 1; i >= 0 && (!click); i--){
 		if (objetos[i] != nullptr) {
@@ -166,13 +168,14 @@ void juegoPG::update() {
 void juegoPG::handle_event() {
 	SDL_Event e;
 	if (SDL_PollEvent(&e)) {
-		if (e.type == SDL_QUIT) exit = true;
+		if (e.type == SDL_QUIT) { 
+			closeSDL();
+			exit = true; 
+		}
 		else if (e.type == SDL_MOUSEBUTTONUP) {
 			if (e.button.button == SDL_BUTTON_LEFT) {
 				cout << "CLICK";
-				mx = e.button.x;
-				my = e.button.y;
-				onClick();
+				onClick(e.button.x, e.button.y);
 			}
 		}
 	else if (e.type == SDL_KEYUP){ //si se pulsa una tecla comprueba que es p

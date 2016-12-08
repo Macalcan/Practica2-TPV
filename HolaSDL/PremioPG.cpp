@@ -2,7 +2,7 @@
 
 
 
-PremioPG::PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py)
+PremioPG::PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py)
 {
 	texturasa = texturas;
 	rectPremio = rectObjeto;
@@ -39,10 +39,10 @@ void PremioPG::reiniciaPremio() {
 }
 //--------------------------------------------------------------------------------//
 bool PremioPG::onClick() {
-	game->getMousePos(premiox, premioy);
-	if (dentro(premiox, premioy)) {
-		juego->newPuntos(this);
-		juego->newBaja(this);
+	
+	if (ObjetoPG::onClick()) {
+		game->newPuntos(this);
+		game->newBaja(this);
 		reiniciaPremio();
 		return true;
 	}
@@ -51,8 +51,9 @@ bool PremioPG::onClick() {
 		if (intento > 0)
 			intento--;
 		else {
-			juego->newBaja(this);
+			game->newBaja(this);
 			reiniciaPremio();
+			return false;
 		}
 		return false;
 	}
