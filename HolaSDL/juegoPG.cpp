@@ -92,6 +92,7 @@ bool juegoPG::initObjetos() {
 
 	numG = dim; //numero total de globos al principio del juego
 	objetos.emplace_back(new MariposaPG(this, Tmariposa, x, y));
+	objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
 	
 	return (texturas[TGloboN] != nullptr || texturas[Tmariposa] != nullptr || texturas[Tpremio] != nullptr);
 }
@@ -146,9 +147,11 @@ void juegoPG::render() const {
 //a los puntos conseguidos en total
 void juegoPG::onClick(){
 	bool click = false;
-	for (int i = dim-1; i >= 0 && (!click); i--){
-		if (objetos[i]->onClick()){
-			click = true;
+	for (int i = objetos.size() - 1; i >= 0 && (!click); i--){
+		if (objetos[i] != nullptr) {
+			if (objetos[i]->onClick()) {
+				click = true;
+			}
 		}
 	}
 }
@@ -172,7 +175,7 @@ void juegoPG::handle_event() {
 				onClick();
 			}
 		}
-		else if (e.type == SDL_KEYUP){ //si se pulsa una tecla comprueba que es p
+	else if (e.type == SDL_KEYUP){ //si se pulsa una tecla comprueba que es p
 			if (e.key.keysym.sym == SDLK_p){
 				if (!pausa) //si pausa es false se activa y sino se desactiva
 					pausa = true;

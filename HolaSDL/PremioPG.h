@@ -11,10 +11,14 @@ public:
 	void update();
 	bool onClick();
 	int getPuntos();
+	void reiniciaPremio();
 	~PremioPG();
 
 private:
 	juegoPG* game;
-	int puntos;
+	int puntos, intento, puntosIni;
+	int premiox, premioy;
+	SDL_Rect rectPremio;
+	bool visible;
 };
 

@@ -5,33 +5,57 @@
 PremioPG::PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py)
 {
 	texturasa = texturas;
+	rectPremio = rectObjeto;
 	game = juego;
-	x = px;
-	y = py;
+	premiox = px;
+	premioy = py;
 	alto = ancho = 50;
-	puntos = 15;
+	puntos = puntosIni = 15;
+	visible = false;
+	intento = 3;
+
+	rectPremio.x = premiox;
+	rectPremio.y = premioy;
+	rectPremio.w = ancho;
+	rectPremio.h = alto;
+
 }
 
 void PremioPG::draw() {
-	rectObjeto = { x, y, ancho, alto };
+	if (visible)
 		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
 }
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
-		puntos = puntos + 5;
-		if (puntos <= 0) juego->newBaja(this);
-	
+	puntos -= 5;
+}
+//--------------------------------------------------------------------------------//
+void PremioPG::reiniciaPremio() {
+	puntos = puntosIni;
+	intento = 3;
+	rectPremio.x = rand() % 450;
+	rectPremio.y = rand() % 450;
+	visible = false;
 }
 //--------------------------------------------------------------------------------//
 bool PremioPG::onClick() {
-	int x, y;
-	juego->getMousePos(x, y);
-	if (dentro(x, y)) {
+	game->getMousePos(premiox, premioy);
+	if (dentro(premiox, premioy)) {
 		juego->newPuntos(this);
 		juego->newBaja(this);
+		reiniciaPremio();
+		return true;
 	}
 
-	return dentro(x, y);
+	else if (visible) {
+		if (intento > 0)
+			intento--;
+		else {
+			juego->newBaja(this);
+			reiniciaPremio();
+		}
+		return false;
+	}
 }
 //--------------------------------------------------------------------------------//
 //getter de puntos del globo
