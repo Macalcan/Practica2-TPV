@@ -1,7 +1,5 @@
 #include "PremioPG.h"
 
-
-
 PremioPG::PremioPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
 {
 	texturasa = texturas;
@@ -11,13 +9,12 @@ PremioPG::PremioPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py
 	y = py;
 	alto = ancho = 50;
 	puntosIni = puntos = 15;
-	rectPremio = rectObjeto;
+
 	intento = 3;
-	rectPremio.x = x;
-	rectPremio.y = y;
-	rectPremio.w = ancho;
-	rectPremio.h = alto;
-	visible = false;
+	rectObjeto.x = x;
+	rectObjeto.y = y;
+	rectObjeto.w = ancho;
+	rectObjeto.h = alto;
 }
 
 void PremioPG::draw() {
@@ -28,8 +25,6 @@ void PremioPG::draw() {
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
 		puntos -= 5;
-	//if (puntos <= 0) juego->newBaja(this);
-	
 }
 //--------------------------------------------------------------------------------//
 bool PremioPG::onClick() {
@@ -41,17 +36,18 @@ bool PremioPG::onClick() {
 		visible = false;
 		return true;
 	}
+
 	else if (visible) {
 		if (intento > 0)
 			intento--;
 		else {
 			juego->newBaja(this);
 			reiniciaPremio();
-			
 		}
 		return false;
-		
 	}
+
+	else return false;
 }
 //--------------------------------------------------------------------------------//
 //getter de puntos del globo

@@ -14,7 +14,6 @@ public:
 	~PremioPG();
 
 private:
-	bool visible;
 	void reiniciaPremio();
 	juegoPG* game;
 	int puntosIni;

@@ -17,7 +17,7 @@ bool ObjetoPG::onClick(){
 	int mpx; 
 	int mpy;
 	juego->getMousePos(mpx, mpy);
-	return dentro(mpx, mpy);
+	return /*visible && */dentro(mpx, mpy);
 }
 void ObjetoPG::draw(){
 	

@@ -24,14 +24,12 @@ juegoPG::juegoPG()
 	pausa = false; //se se pulsa p es true y se para la actualizacion de los globos
 	puntos = 0; //puntos al comenzar el juego
 	initSDL();
+
 	//metemos las rutas de texturas
-
-
 	rutasText.emplace_back("..\\bmps\\sky.jpg");
 	rutasText.emplace_back("..\\bmps\\globoN.png");
 	rutasText.emplace_back("..\\bmps\\butterfly.png");
 	rutasText.emplace_back("..\\bmps\\Gift.png");
-	
 	
 	initObjetos();
 }
@@ -92,7 +90,7 @@ bool juegoPG::initObjetos() {
 
 	numG = dim; //numero total de globos al principio del juego
 	objetos.emplace_back(new MariposaPG(this, Tmariposa, x, y));
-	//objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
+	objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
 	
 	return (texturas[TGloboN] != nullptr || texturas[Tmariposa] != nullptr || texturas[Tpremio] != nullptr);
 }
@@ -237,7 +235,7 @@ void juegoPG::newBaja(ObjetoJuego* po) {
 	}
 
 	else if (typeid(*po) == typeid(PremioPG)) {
-		delete objetos[objetos.size() - 1];
+		objetos[objetos.size() - 1]->visible = false;
 	}
 }
 //--------------------------------------------------------------------------------//
@@ -249,11 +247,8 @@ void juegoPG::newPuntos(ObjetoJuego* po) {
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPremio() {
-	// tiene dos parametros x e y donde se genrerará el nuevo premio
-	x = rand() % 450;
-	y = rand() % 450;
-	getTextura(Tpremio);
-	objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
+	if (!objetos[objetos.size() - 1]->visible)
+		objetos[objetos.size() - 1]->visible = true;
 }
 //--------------------------------------------------------------------------------//
 
