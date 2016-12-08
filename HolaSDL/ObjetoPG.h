@@ -8,16 +8,15 @@ public:
 
 	ObjetoPG();
 	virtual ~ObjetoPG();
+	bool dentro(int x, int y) const; //llamara a posMouse de juegoPG
 	virtual void draw();
 	virtual void update();
 	virtual bool onClick();
 
 protected:
-
-	ObjetoPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py);
-	bool dentro(int x, int y) const; //llamara a posMouse de juegoPG
+	
 	// sustituye al puntero a la textura y al renderizador de la clase Globo
-	juegoPG* game;
+	juegoPG* juego;
 	SDL_Renderer* pRender;
 
 	int x;

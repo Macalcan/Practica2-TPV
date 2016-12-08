@@ -1,5 +1,24 @@
-﻿  juegoPG.cpp
-c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(138): warning C4018: '<': no coinciden signed/unsigned
-c:\users\adrian\documents\2 gdv\tpv\practicas\practica2-tpv\holasdl\juegopg.cpp(163): warning C4018: '<': no coinciden signed/unsigned
-  HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Adrian\Documents\2 GDV\TPV\PRACTICAS\Practica2-TPV\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Compilación iniciada a las 08/12/2016 12:56:19.
+     1>Proyecto "C:\Users\Blanca\Documents\Universidad\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PremioPG.cpp juegoPG.cpp
+         juegoPG.cpp
+     1>c:\users\blanca\documents\universidad\practica2-tpv\holasdl\juegopg.cpp(138): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\blanca\documents\universidad\practica2-tpv\holasdl\juegopg.cpp(161): warning C4018: '<' : no coinciden signed/unsigned
+         PremioPG.cpp
+         Generando código...
+     1>c:\users\blanca\documents\universidad\practica2-tpv\holasdl\premiopg.cpp(55): warning C4715: 'PremioPG::onClick' : no todas las rutas de acceso de control devuelven un valor
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Blanca\Documents\Universidad\Practica2-TPV\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Blanca\Documents\Universidad\Practica2-TPV\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Blanca\Documents\Universidad\Practica2-TPV\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\GlobosPG.obj
+         Debug\juegoPG.obj
+         Debug\mainP1.obj
+         Debug\MariposaPG.obj
+         Debug\ObjetoPG.obj
+         Debug\PremioPG.obj
+         Debug\TexturasSDL.obj
+         HolaSDL.vcxproj -> C:\Users\Blanca\Documents\Universidad\Practica2-TPV\bin\HolaSDLDebug.exe
+     1>Compilación del proyecto terminada "C:\Users\Blanca\Documents\Universidad\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" (Build destinos).
+
+Compilación correcta.
+
+Tiempo transcurrido 00:00:01.70

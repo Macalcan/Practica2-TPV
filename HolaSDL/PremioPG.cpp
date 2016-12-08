@@ -2,66 +2,68 @@
 
 
 
-PremioPG::PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py)
+PremioPG::PremioPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
 {
 	texturasa = texturas;
-	rectPremio = rectObjeto;
+	juego = jueg;
 	game = juego;
-	premiox = px;
-	premioy = py;
+	x = px;
+	y = py;
 	alto = ancho = 50;
-	puntos = puntosIni = 15;
-	visible = false;
+	puntosIni = puntos = 15;
+	rectPremio = rectObjeto;
 	intento = 3;
-
-	rectPremio.x = premiox;
-	rectPremio.y = premioy;
+	rectPremio.x = x;
+	rectPremio.y = y;
 	rectPremio.w = ancho;
 	rectPremio.h = alto;
-
+	visible = false;
 }
 
 void PremioPG::draw() {
+	rectObjeto = { x, y, ancho, alto };
 	if (visible)
 		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
 }
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
-	puntos -= 5;
-}
-//--------------------------------------------------------------------------------//
-void PremioPG::reiniciaPremio() {
-	puntos = puntosIni;
-	intento = 3;
-	rectPremio.x = rand() % 450;
-	rectPremio.y = rand() % 450;
-	visible = false;
+		puntos -= 5;
+	//if (puntos <= 0) juego->newBaja(this);
+	
 }
 //--------------------------------------------------------------------------------//
 bool PremioPG::onClick() {
 	
 	if (ObjetoPG::onClick()) {
-		game->newPuntos(this);
-		game->newBaja(this);
+		juego->newPuntos(this);
+		juego->newBaja(this);
 		reiniciaPremio();
+		visible = false;
 		return true;
 	}
-
 	else if (visible) {
 		if (intento > 0)
 			intento--;
 		else {
-			game->newBaja(this);
+			juego->newBaja(this);
 			reiniciaPremio();
-			return false;
+			
 		}
 		return false;
+		
 	}
 }
 //--------------------------------------------------------------------------------//
 //getter de puntos del globo
 int PremioPG::getPuntos() {
 	return puntos;
+}
+void PremioPG::reiniciaPremio() {
+	puntos = puntosIni;
+	intento = 3;
+	rectPremio.x = rand() % 450;
+	rectPremio.y = rand() % 450;
+	visible = false;
 }
 
 PremioPG::~PremioPG()
