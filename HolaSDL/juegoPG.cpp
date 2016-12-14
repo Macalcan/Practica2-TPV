@@ -191,7 +191,7 @@ void juegoPG::run()
 		cout << "Play \n";
 		Uint32 lastUpdate = SDL_GetTicks();
 		string puntuacion = "preparado!!?? ";
-		//SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Practica1", puntuacion.c_str(), nullptr);
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, "Practica1", puntuacion.c_str(), nullptr);
 		
 		render();
 		handle_event();
@@ -199,6 +199,7 @@ void juegoPG::run()
 			if (SDL_GetTicks() - lastUpdate >= MSxUpdate){//while(elapsed >= MSxUpdate)
 				if (!pausa)
 					update();
+				cout << numG;
 				lastUpdate = SDL_GetTicks();
 			}
 

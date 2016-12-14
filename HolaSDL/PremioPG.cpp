@@ -57,8 +57,8 @@ int PremioPG::getPuntos() {
 void PremioPG::reiniciaPremio() {
 	puntos = puntosIni;
 	intento = 3;
-	rectPremio.x = rand() % 450;
-	rectPremio.y = rand() % 450;
+	x = rand() % 450;
+	y = rand() % 450;
 	visible = false;
 }
 

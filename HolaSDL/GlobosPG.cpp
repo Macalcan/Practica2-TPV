@@ -31,7 +31,7 @@ void GlobosPG::draw() {
 bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
 	
-	if (ObjetoPG::onClick()){
+	if (ObjetoPG::onClick() && !explotado){
 		invisible = true;
 		explotado = true;
 		juego->newBaja(this);
@@ -45,22 +45,27 @@ bool GlobosPG::onClick(){
 //actualiza el globo
 void GlobosPG::update(){
 	//si se ha deshinchado o se ha explotado el globo ya no sera visible 
-	if (inflado == 0 || explotado)
-		invisible = true;
-	else {
-		if (rand() % 100 < PVIS) //probabilidad de que sea visible o no
-			invisible = false;
-		else
+	if (!explotado){
+		if (inflado <= 0){
+			explotado = true;
 			invisible = true;
-
-		if (rand() % 100 < PDES){ //probabilidad de que se desinfle
-			inflado -= 10; //disminuye el "aire" que tiene el globo
-			alto -= 10; //disminuye el tamaño del globo
-			ancho -= 10;
-			//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
-			puntos += 2;
+			juego->newBaja(this);
 		}
-		
+		else {
+			if (rand() % 100 < PVIS) //probabilidad de que sea visible o no
+				invisible = false;
+			else
+				invisible = true;
+
+			if (rand() % 100 < PDES){ //probabilidad de que se desinfle
+				inflado -= 10; //disminuye el "aire" que tiene el globo
+				alto -= 10; //disminuye el tamaño del globo
+				ancho -= 10;
+				//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
+				puntos += 2;
+			}
+
+		}
 	}
 }
 
