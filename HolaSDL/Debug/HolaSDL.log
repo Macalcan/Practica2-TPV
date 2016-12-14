@@ -1,11 +1,11 @@
-﻿Compilación iniciada a las 14/12/2016 15:05:40.
+﻿Compilación iniciada a las 14/12/2016 15:10:19.
      1>Proyecto "C:\Users\Blanca\Documents\Universidad\Segundo\TPV\p2\Practica2-TPV\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt juegoPG.cpp
          juegoPG.cpp
      1>c:\users\blanca\documents\universidad\segundo\tpv\p2\practica2-tpv\holasdl\juegopg.cpp(144): warning C4018: '<' : no coinciden signed/unsigned
      1>c:\users\blanca\documents\universidad\segundo\tpv\p2\practica2-tpv\holasdl\juegopg.cpp(167): warning C4018: '<' : no coinciden signed/unsigned
-     1>c:\users\blanca\documents\universidad\segundo\tpv\p2\practica2-tpv\holasdl\juegopg.cpp(260): warning C4018: '>' : no coinciden signed/unsigned
+     1>c:\users\blanca\documents\universidad\segundo\tpv\p2\practica2-tpv\holasdl\juegopg.cpp(261): warning C4018: '>' : no coinciden signed/unsigned
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Blanca\Documents\Universidad\Segundo\TPV\p2\Practica2-TPV\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Blanca\Documents\Universidad\Segundo\TPV\p2\Practica2-TPV\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Blanca\Documents\Universidad\Segundo\TPV\p2\Practica2-TPV\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\GlobosPG.obj
          Debug\juegoPG.obj
@@ -19,4 +19,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:00.74
+Tiempo transcurrido 00:00:00.95

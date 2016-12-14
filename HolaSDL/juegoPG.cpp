@@ -244,7 +244,7 @@ void juegoPG::newBaja(ObjetoJuego* po) {
 	}
 
 	else if (typeid(*po) == typeid(PremioPG)) {
-		objetos[objetos.size() - 1]->visible = false;
+		dynamic_cast<PremioPG*>(po)->visible = false;
 	}
 }
 //--------------------------------------------------------------------------------//
