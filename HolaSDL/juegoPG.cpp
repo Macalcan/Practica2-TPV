@@ -8,6 +8,7 @@
 #include "PremioPG.h"
 #include "MariposaPG.h"
 #include "GlobosPG.h"
+#include "GloboA.h"
 #include "ObjetoPG.h"
 using namespace std;
 
@@ -86,7 +87,7 @@ bool juegoPG::initObjetos() {
 		if (i%2 == 0)
 			objetos.emplace_back( new GlobosPG(this, TGloboN, x, y)); //cada globo tendrá la textura 0 o la textura 1
 		else
-			objetos.emplace_back(new GlobosPG(this, TGloboM, x, y));
+			objetos.emplace_back(new GloboA(this, TGloboM, x, y));
 	}
 	numPremios = numMariposas = 2;
 	for (int i = dim; i < numMariposas + dim; i++){
@@ -241,7 +242,7 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
 	//queremos saber si lo que destruimos es un globo
-	if (typeid(*po) == typeid(GlobosPG)) {
+	if (typeid(*po) == typeid(GlobosPG) || typeid(*po) == typeid(GloboA)) {
 		numG--;
 	}
 
