@@ -22,7 +22,7 @@ public:
 	void newPuntos(ObjetoJuego * po);
 	void newPremio();
 	
-	enum Texturas_t { TFondo, TGloboN, Tmariposa, Tpremio };
+	enum Texturas_t { TFondo, TGloboN, TGloboM, Tmariposa, Tpremio };
 	SDL_Renderer* getRender()const;
 	TexturasSDL* getTextura(Texturas_t et) const { return texturas[et]; } //metodo inline
 	
@@ -43,7 +43,8 @@ private:
 	std::vector<std::string> rutasText;	
 	
 	int puntos;
-	
+	int numMariposas;
+	int numPremios;
 	bool error, gameOver, exit;
 	SDL_Window* pWindow;
 	SDL_Renderer* pRenderer;

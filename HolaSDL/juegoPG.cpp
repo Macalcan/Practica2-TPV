@@ -28,6 +28,7 @@ juegoPG::juegoPG()
 	//metemos las rutas de texturas
 	rutasText.emplace_back("..\\bmps\\sky.jpg");
 	rutasText.emplace_back("..\\bmps\\globoN.png");
+	rutasText.emplace_back("..\\bmps\\globoM.png");
 	rutasText.emplace_back("..\\bmps\\butterfly.png");
 	rutasText.emplace_back("..\\bmps\\Gift.png");
 	
@@ -73,7 +74,7 @@ bool juegoPG::initObjetos() {
 	int y;
 
 	//inicializa las texturas de los globos
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		texturas.emplace_back(new TexturasSDL());
 		texturas[i]->load(pRenderer, rutasText[i]);
 	}
@@ -82,15 +83,22 @@ bool juegoPG::initObjetos() {
 	for (int i = 0; i < dim; i++){//creamos un globo en cada vuelta en una posicion aleatoria en el rectangulo de la ventana
 		x = rand() % 450;
 		y = rand() % 450;
-		objetos.emplace_back( new GlobosPG(this, TGloboN, x, y)); //cada globo tendrá la textura 0 o la textura 1
+		if (i%2 == 0)
+			objetos.emplace_back( new GlobosPG(this, TGloboN, x, y)); //cada globo tendrá la textura 0 o la textura 1
+		else
+			objetos.emplace_back(new GlobosPG(this, TGloboM, x, y));
 	}
-
-	x = rand() % 450;
-	y = rand() % 450;
-
+	numPremios = numMariposas = 4;
+	for (int i = dim; i < numMariposas + dim; i++){
+		x = rand() % 450;
+		y = rand() % 450;
+		objetos.emplace_back(new MariposaPG(this, Tmariposa, x, y));
+	}
 	numG = dim; //numero total de globos al principio del juego
-	objetos.emplace_back(new MariposaPG(this, Tmariposa, x, y));
-	objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
+	
+	for (int i = dim + numMariposas; i < numPremios + numMariposas + dim; i++){
+		objetos.emplace_back(new PremioPG(this, Tpremio, x, y));
+	}
 	
 	return (texturas[TGloboN] != nullptr || texturas[Tmariposa] != nullptr || texturas[Tpremio] != nullptr);
 }
@@ -248,8 +256,17 @@ void juegoPG::newPuntos(ObjetoJuego* po) {
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPremio() {
-	if (!objetos[objetos.size() - 1]->visible)
+	bool premioNuevo = false;
+	for (int i = objetos.size() - 1; i > objetos.size() - numPremios -1 && !(premioNuevo); i--){
+		if (!objetos[i]->visible){
+			objetos[i]->visible = true;
+			premioNuevo = true;
+		}
+	}
+	/*if (!objetos[objetos.size() - 1]->visible)
 		objetos[objetos.size() - 1]->visible = true;
+	else if (!objetos[objetos.size() - 2]->visible)
+		objetos[objetos.size() - 2]->visible = true;*/
 }
 //--------------------------------------------------------------------------------//
 
