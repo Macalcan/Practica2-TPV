@@ -88,7 +88,7 @@ bool juegoPG::initObjetos() {
 		else
 			objetos.emplace_back(new GlobosPG(this, TGloboM, x, y));
 	}
-	numPremios = numMariposas = 4;
+	numPremios = numMariposas = 2;
 	for (int i = dim; i < numMariposas + dim; i++){
 		x = rand() % 450;
 		y = rand() % 450;
@@ -115,13 +115,15 @@ void juegoPG::closeSDL() {
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::freeObjetos() {
-	for (int i = 0; i < dim; i++) {
+	for (int i = 0; i < objetos.size(); i++) {
 		delete objetos[i];
 		objetos[i] = nullptr;
 	}
 	//delete de las rutas de codigo
 	delete (texturas[TGloboN]);
 	texturas[TGloboN] = nullptr;
+	delete(texturas[TGloboM]);
+	texturas[TGloboM] = nullptr;
 	delete (texturas[TFondo]);
 	texturas[TFondo] = nullptr;
 	delete (texturas[Tmariposa]);
