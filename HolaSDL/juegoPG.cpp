@@ -210,7 +210,7 @@ void juegoPG::run()
 			if (SDL_GetTicks() - lastUpdate >= MSxUpdate){//while(elapsed >= MSxUpdate)
 				if (!pausa)
 					update();
-				cout << numG;
+				
 				lastUpdate = SDL_GetTicks();
 			}
 
@@ -242,17 +242,16 @@ void juegoPG::getMousePos(int &mpx, int &mpy) const {
 //--------------------------------------------------------------------------------//
 void juegoPG::newBaja(ObjetoJuego* po) {
 	//queremos saber si lo que destruimos es un globo
-	if (typeid(*po) == typeid(GlobosPG) || typeid(*po) == typeid(GloboA)) {
+	if (dynamic_cast<GlobosPG*>(po)) {
 		numG--;
 	}
-
 	else if (typeid(*po) == typeid(PremioPG)) {
 		dynamic_cast<PremioPG*>(po)->visible = false;
 	}
 }
 //--------------------------------------------------------------------------------//
 void juegoPG::newPuntos(ObjetoJuego* po) {
-	if (typeid(*po) == typeid(GlobosPG))
+	if (dynamic_cast<GlobosPG*>(po))
 		puntos += dynamic_cast<GlobosPG*>(po)->getPuntos();
 	else if (typeid(*po) == typeid(PremioPG))
 		puntos += dynamic_cast<PremioPG*>(po)->getPuntos();
@@ -261,15 +260,13 @@ void juegoPG::newPuntos(ObjetoJuego* po) {
 void juegoPG::newPremio() {
 	bool premioNuevo = false;
 	for (int i = objetos.size() - 1; i > objetos.size() - numPremios -1 && !(premioNuevo); i--){
-		if (!objetos[i]->visible){
-			objetos[i]->visible = true;
+		if (!(dynamic_cast<PremioPG*>(objetos[i])->visible))
+		{
+			dynamic_cast<PremioPG*>(objetos[i])->visible = true;
 			premioNuevo = true;
 		}
 	}
-	/*if (!objetos[objetos.size() - 1]->visible)
-		objetos[objetos.size() - 1]->visible = true;
-	else if (!objetos[objetos.size() - 2]->visible)
-		objetos[objetos.size() - 2]->visible = true;*/
+
 }
 //--------------------------------------------------------------------------------//
 

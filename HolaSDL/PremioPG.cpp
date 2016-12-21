@@ -1,27 +1,17 @@
+#ifndef _H_PremioPG_H
+#define _H_PremioPG_H
 #include "PremioPG.h"
 
-PremioPG::PremioPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
+PremioPG::PremioPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int px, int py) : ObjetoPG(jueg, texturas, px, py)
 {
-	texturasa = texturas;
-	juego = jueg;
-	game = juego;
-	x = px;
-	y = py;
-	alto = ancho = 50;
+	
+	rectObjeto.w = rectObjeto.h = 50;
 	puntosIni = puntos = 15;
-
 	intento = 3;
-	rectObjeto.x = x;
-	rectObjeto.y = y;
-	rectObjeto.w = ancho;
-	rectObjeto.h = alto;
+
 }
 
-void PremioPG::draw() {
-	rectObjeto = { x, y, ancho, alto };
-	if (visible)
-		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
-}
+
 //--------------------------------------------------------------------------------//
 void PremioPG::update() {
 	if (puntos > 0)
@@ -58,11 +48,12 @@ int PremioPG::getPuntos() {
 void PremioPG::reiniciaPremio() {
 	puntos = puntosIni;
 	intento = 3;
-	x = rand() % 450;
-	y = rand() % 450;
+	rectObjeto.x = rand() % 450;
+	rectObjeto.y = rand() % 450;
 	visible = false;
 }
 
 PremioPG::~PremioPG()
 {
 }
+#endif

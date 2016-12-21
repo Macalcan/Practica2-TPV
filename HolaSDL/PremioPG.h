@@ -6,19 +6,21 @@
 class PremioPG : public ObjetoPG
 {
 public:
-	PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py);
-	void draw();
+	PremioPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py);
+	~PremioPG();
+
+
 	void update();
 	bool onClick();
+
 	int getPuntos();
-	~PremioPG();
+	
 
 private:
 	void reiniciaPremio();
-	juegoPG* game;
+	
 	int puntosIni;
 	int puntos;
-	SDL_Rect rectPremio;
 	int intento;
 };
 

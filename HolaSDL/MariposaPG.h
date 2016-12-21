@@ -6,7 +6,7 @@
 class MariposaPG : public ObjetoPG
 {
 public:
-	MariposaPG(juegoPG* juego, juegoPG::Texturas_t texturas, int &px, int &py);
+	MariposaPG(juegoPG* juego, juegoPG::Texturas_t texturas, int px, int py);
 	void draw();
 	void update();
 	bool onClick();
@@ -18,7 +18,7 @@ private:
 	int frameActual;
 	SDL_Rect RFrame;
 	SDL_Rect rectMarip;
-	juegoPG* game;
+	
 	int posx, posy;
 };
 

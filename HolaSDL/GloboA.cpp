@@ -1,43 +1,24 @@
-//Ampliacion realizada por Adrian Alcantara Delgado
+// Practica realizada por Blanca Macazaga Zuazo y Adrián Alcántara Delgado
+#ifndef _H_GloboA_H
+#define _H_GloboA_H
 #include "GloboA.h"
 using namespace std;
 
-GloboA::GloboA(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py) : GlobosPG(jueg, texturas, px, py)
+
+GloboA::GloboA(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py) :GlobosPG(jueg, texturas, px, py)
 {
-	texturasa = texturas;
-	x = px; //posicion en el eje x e y del globo
-	y = py;
-	juego = jueg;
-	game = juego; //puntero a la clase juegoPG
-	alto = ancho = 100; //tamaño del globo
+	//visible = true;
+	/*visible = true;
+	puntos = 0;
 	explotado = false;
-	invisible = false;
-	puntos = 5; //puntos iniciales
-
-	inflado = 100; //inicialmente el globo está totalmente inflado
+	inflado = 100;
+	rectObjeto.h = rectObjeto.w = 100^*/
 }
+
+
 //--------------------------------------------------------------------------------//
-void GloboA::draw() {
-	rectObjeto = { x, y, ancho, alto };
-	if (!invisible){
-		//ObjetoPG::draw();
-		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
-	}
-}
-//--------------------------------------------------------------------------------//
-bool GloboA::onClick(){
-	//comprueba si se ha explotado el globo en el rectangulo de la imagen
 
-	if (ObjetoPG::onClick() && !explotado){
-		invisible = true;
-		explotado = true;
-		juego->newBaja(this);
-		juego->newPuntos(this);
-		return true;
-	}
-	else return false;
 
-}
 //--------------------------------------------------------------------------------//
 //actualiza el globo
 void GloboA::update(){
@@ -45,37 +26,35 @@ void GloboA::update(){
 	if (!explotado){
 		if (inflado <= 0){
 			explotado = true;
-			invisible = true;
+			visible = true;
 			juego->newBaja(this);
 		}
 		else {
+
 			if (rand() % 100 < PDES){ //probabilidad de que se desinfle
 				inflado -= 10; //disminuye el "aire" que tiene el globo
-				alto -= 10; //disminuye el tamaño del globo
-				ancho -= 10;
-				if (y - 10 >= 0){
-					y -= 10;
-					//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
+				rectObjeto.h -= 10; //disminuye el tamaño del globo
+				rectObjeto.w -= 10;
+				
+				//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
+				if (rectObjeto.y >= 40){
 					puntos += 2;
+					rectObjeto.y -= 40;
 				}
-				else {
-					y = 0;
-					puntos += 2;
-					if (puntos/ 2 > 1)
-						puntos = puntos / 2;
-					else puntos = 0;
-				}
+				else
+					puntos -= 2; //si pierde el doble de puntos que gana al desinflarse, directamente pierde dos puntos
 			}
 
 		}
 	}
 }
-//--------------------------------------------------------------------------------//
-//getter de puntos del globo
-int GloboA::getPuntos(){
-	return puntos;
-}
+
+
+
+
 //--------------------------------------------------------------------------------//
 GloboA::~GloboA()
 {
+
 }
+#endif

@@ -1,11 +1,15 @@
+#ifndef _H_ObjetoPG_H
+#define _H_ObjetoPG_H
 #include "ObjetoPG.h"
 
 
-ObjetoPG::ObjetoPG()
+ObjetoPG::ObjetoPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int px, int py) 
 {	
-	//juego = nullptr;
-	
-	
+	juego = jueg;
+	texturasa = texturas;
+	rectObjeto.x = px;
+	rectObjeto.y = py;
+
 }
 
 bool ObjetoPG::dentro(int x, int y) const{
@@ -17,17 +21,20 @@ bool ObjetoPG::onClick(){
 	int mpx; 
 	int mpy;
 	juego->getMousePos(mpx, mpy);
-	return /*visible && */dentro(mpx, mpy);
+	return dentro(mpx, mpy);
 }
 void ObjetoPG::draw(){
 	
+	if (visible){
+		juego->getTextura(texturasa)->draw(juego->getRender(), rectObjeto);
+	}
 }
 
-void ObjetoPG::update() {
 
-}
 
 
 ObjetoPG::~ObjetoPG()
 {
 }
+
+#endif

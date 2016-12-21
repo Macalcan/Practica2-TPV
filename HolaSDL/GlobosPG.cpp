@@ -1,38 +1,27 @@
 // Practica realizada por Blanca Macazaga Zuazo y Adrián Alcántara Delgado
+#ifndef _H_GlobosPG_H
+#define _H_GlobosPG_H
 #include "GlobosPG.h"
+
 using namespace std;
 
 
-GlobosPG::GlobosPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
+
+GlobosPG::GlobosPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int px, int py) : ObjetoPG(jueg, texturas, px, py)
 {
-	texturasa = texturas;
-	x = px; //posicion en el eje x e y del globo
-	y = py;
-	juego = jueg;
-	game = juego; //puntero a la clase juegoPG
-	alto = ancho = 100; //tamaño del globo
-	explotado = false; 
-	invisible = false;
-	puntos = 5; //puntos iniciales
-
-	inflado = 100; //inicialmente el globo está totalmente inflado
+	visible = true;
+	puntos = 0;
+	explotado = false;
+	inflado = 100;
+	rectObjeto.h = rectObjeto.w = 100;
 }
 
 
-//--------------------------------------------------------------------------------//
-void GlobosPG::draw() {
-	rectObjeto = { x, y, ancho, alto };
-	if (!invisible){
-		//ObjetoPG::draw();
-		game->getTextura(texturasa)->draw(game->getRender(), rectObjeto);
-	}
-}
-//--------------------------------------------------------------------------------//
 bool GlobosPG::onClick(){
 	//comprueba si se ha explotado el globo en el rectangulo de la imagen
 	
 	if (ObjetoPG::onClick() && !explotado){
-		invisible = true;
+		visible = false;
 		explotado = true;
 		juego->newBaja(this);
 		juego->newPuntos(this);
@@ -48,19 +37,19 @@ void GlobosPG::update(){
 	if (!explotado){
 		if (inflado <= 0){
 			explotado = true;
-			invisible = true;
+			visible = false;
 			juego->newBaja(this);
 		}
 		else {
 			if (rand() % 100 < PVIS) //probabilidad de que sea visible o no
-				invisible = false;
+				visible = true;
 			else
-				invisible = true;
+				visible = false;
 
 			if (rand() % 100 < PDES){ //probabilidad de que se desinfle
 				inflado -= 10; //disminuye el "aire" que tiene el globo
-				alto -= 10; //disminuye el tamaño del globo
-				ancho -= 10;
+				rectObjeto.h -= 10; //disminuye el tamaño del globo
+				rectObjeto.w -= 10;
 				//aumentan los puntos que se recibe al explotar el globo cuanto menos inflado este
 				puntos += 2;
 			}
@@ -79,3 +68,4 @@ GlobosPG::~GlobosPG()
 {
 
 }
+#endif

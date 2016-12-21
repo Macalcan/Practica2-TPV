@@ -1,18 +1,17 @@
+#ifndef _H_MariposaPG_H
+#define _H_MariposaPG_H
 #include "MariposaPG.h"
 #include <iostream>
 using namespace std;
 
 
-MariposaPG::MariposaPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int &py)
+MariposaPG::MariposaPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int px, int py) : ObjetoPG(jueg, texturas, px, py)
 {
-	texturasa = texturas;
-	posx = px; //posiciones x e y de la mariposa
-	posy = py;
-	juego = jueg;
-	game = juego; //puntero a juego
+	visible = true;
 	contClicks = 0; //aun no se le ha dado ningun click
 	frameActual = 1; //modificar segun la imagen de la mariposa
 	frame = 14;
+
 
 	RFrame.w = 979 / 14;
 	RFrame.h = 72;
@@ -26,7 +25,7 @@ MariposaPG::MariposaPG(juegoPG* jueg, juegoPG::Texturas_t texturas, int &px, int
 }
 
 void MariposaPG::draw() {
-	game->getTextura(texturasa)->draw(game->getRender(), rectObjeto, RFrame);
+	juego->getTextura(texturasa)->draw(juego->getRender(), rectObjeto, RFrame);
 }
 //--------------------------------------------------------------------------------//
 void MariposaPG::update() {
@@ -53,7 +52,7 @@ bool MariposaPG::onClick() {
 		rectObjeto.x = rand() % 450;
 		rectObjeto.y = rand() % 450;
 		if (contClicks == 3) {
-			game->newPremio(); //crea premio
+			juego->newPremio(); //crea premio
 			contClicks = 0; //contador a 0 para volver a contar los clicks para un nuevo premio
 		}
 		return true; //si se hace click en mariposa devuelve true sino false
@@ -66,3 +65,4 @@ bool MariposaPG::onClick() {
 MariposaPG::~MariposaPG()
 {
 }
+#endif
