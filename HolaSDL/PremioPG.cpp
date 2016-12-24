@@ -28,10 +28,10 @@ bool PremioPG::onClick() {
 		return true;
 	}
 
-	else if (visible) {
-		if (intento > 0)
-			intento--;
-		else {
+	else if (intento > 0) {
+		
+		intento--;
+		if(intento == 0){
 			juego->newBaja(this);
 			reiniciaPremio();
 		}
